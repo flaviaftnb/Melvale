@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nossos Produtos | Melvale - Gestão Sustentável de Paletes</title>
+  <meta name="description" content="Nossos Produtos: Venda de paletes e chapas de eucatex (chapas de fibra de madeira)." />
+  
+  <!-- Google Fonts: Plus Jakarta Sans & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            heading: ['"Outfit"', 'sans-serif'],
+          },
+          colors: {
+            eco: {
+              50: '#F4F8F3',
+              100: '#E7F2E5',
+              200: '#CEE3CA',
+              300: '#A9CFA3',
+              400: '#7CB573',
+              500: '#589B4E',
+              600: '#447D3B',
+              700: '#35632F',
+              800: '#1b2436',
+              900: '#111723',
+              dark: '#111723',
+              deep: '#111723',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Tipografia responsiva e prevenção de viúvas */
+    h1, h2, h3, h4, h5, h6, .text-balance {
+      text-wrap: balance;
+      -webkit-text-wrap: balance;
+    }
+    p, li, .text-pretty {
+      text-wrap: pretty;
+      -webkit-text-wrap: pretty;
+    }
+    html {
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+    body {
+      overflow-x: hidden;
+      width: 100%;
+    }
+    .touch-target {
+      min-height: 48px;
+    }
+  </style>
+</head>
+<body class="bg-[#F8FAF7] text-slate-800 antialiased font-sans selection:bg-eco-500 selection:text-white flex flex-col min-h-screen justify-between">
+
+  <!-- ================= MENU PRINCIPAL ================= -->
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-eco-100 shadow-sm transition-all">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 sm:h-20">
+        
+        <!-- Logo Melvale -->
+        <a href="index.html" class="flex items-center group">
+          <img src="assets/logo.png" alt="Melvale" class="h-8 sm:h-11 w-auto object-contain transition-transform group-hover:scale-105" />
+        </a>
+
+        <!-- Desktop Navigation Menu -->
+        <nav class="hidden md:flex items-center gap-7 text-[15px] font-medium text-slate-700">
+          <a href="index.html" class="hover:text-eco-600 transition-colors pb-1">Início</a>
+          <a href="index.html#como-funciona" class="hover:text-eco-600 transition-colors pb-1">Como Funciona</a>
+          <a href="index.html#beneficios" class="hover:text-eco-600 transition-colors pb-1">Benefícios</a>
+          <a href="filiais.html" class="hover:text-eco-600 transition-colors pb-1">Nossas Filiais</a>
+          <a href="produtos.html" class="text-eco-700 font-bold border-b-2 border-eco-600 pb-1">Nossos Produtos</a>
+        </nav>
+
+        <!-- Right CTA Button -->
+        <div class="hidden sm:flex items-center">
+          <a href="contato.html" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-eco-600 hover:bg-eco-700 text-white font-semibold text-sm shadow-md hover:shadow-lg transition-all touch-target">
+            <i data-lucide="message-square" class="w-4 h-4"></i>
+            <span>Entrar em Contato</span>
+          </a>
+        </div>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button id="mobileMenuBtn" aria-label="Abrir Menu" class="md:hidden p-2.5 rounded-2xl text-slate-700 hover:bg-eco-50 active:bg-eco-100 focus:outline-none transition-colors touch-target flex items-center justify-center">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+
+      </div>
+    </div>
+
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobileMenu" class="hidden md:hidden border-t border-eco-100 bg-white/98 backdrop-blur-md px-5 pt-3 pb-6 space-y-2 shadow-2xl">
+      <a href="index.html" class="flex items-center justify-between px-4 py-3 rounded-2xl text-base font-semibold text-slate-800 hover:bg-eco-50 active:bg-eco-100 transition-colors touch-target">
+        <span>Início</span>
+        <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+      </a>
+      <a href="index.html#como-funciona" class="flex items-center justify-between px-4 py-3 rounded-2xl text-base font-semibold text-slate-800 hover:bg-eco-50 active:bg-eco-100 transition-colors touch-target">
+        <span>Como Funciona</span>
+        <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+      </a>
+      <a href="index.html#beneficios" class="flex items-center justify-between px-4 py-3 rounded-2xl text-base font-semibold text-slate-800 hover:bg-eco-50 active:bg-eco-100 transition-colors touch-target">
+        <span>Benefícios</span>
+        <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+      </a>
+      <a href="filiais.html" class="flex items-center justify-between px-4 py-3 rounded-2xl text-base font-semibold text-slate-800 hover:bg-eco-50 active:bg-eco-100 transition-colors touch-target">
+        <span>Nossas Filiais</span>
+        <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+      </a>
+      <a href="produtos.html" class="flex items-center justify-between px-4 py-3 rounded-2xl text-base font-bold text-eco-700 bg-eco-50 touch-target">
+        <span>Nossos Produtos</span>
+        <i data-lucide="chevron-right" class="w-4 h-4 text-eco-600"></i>
+      </a>
+      <a href="contato.html" class="flex items-center justify-center gap-2 w-full px-5 py-3.5 rounded-2xl bg-eco-600 active:bg-eco-700 text-white font-semibold text-base shadow-md mt-3 touch-target">
+        <i data-lucide="message-square" class="w-4 h-4"></i>
+        <span>Entrar em Contato</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- ================= BANNER / HEADER DA PÁGINA ================= -->
+  <section class="bg-eco-dark text-white py-14 sm:py-20 relative overflow-hidden">
+    <div class="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-30" style="background-image: url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=95&w=2560&auto=format&fit=crop');"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-[#111723]/80 via-[#111723]/70 to-[#111723]"></div>
+    <div class="relative max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 text-center space-y-4">
+      <h1 class="font-heading font-extrabold text-2xl sm:text-4xl lg:text-5xl text-white tracking-tight text-balance">
+        Nossos Produtos
+      </h1>
+    </div>
+  </section>
+
+  <!-- ================= LISTAGEM DE PRODUTOS ================= -->
+  <main class="py-14 sm:py-20 bg-[#F8FAF7] flex-1">
+    <div class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
+      
+      <!-- Grid com 2 blocos de produto lado a lado (dinâmico via CMS) -->
+      <div id="productsListContainer" class="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
+        
+        <!-- PRODUTO 1: VENDA DE PALETES -->
+        <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-eco-200/80 flex flex-col sm:flex-row items-stretch sm:h-[240px] lg:h-[250px]">
+          <!-- Foto na esquerda (quadrada de acordo com a altura disponível no bloco) -->
+          <div class="w-full sm:w-auto h-64 sm:h-full aspect-square shrink-0 overflow-hidden relative bg-eco-50">
+            <img 
+              src="assets/Paletes.webp" 
+              alt="Paletes de Madeira" 
+              class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+            />
+          </div>
+
+          <!-- Título e botão na direita -->
+          <div class="p-6 sm:p-7 flex-1 flex flex-col justify-between gap-4">
+            <div>
+              <h2 class="font-heading font-extrabold text-xl sm:text-2xl text-slate-900 leading-snug">
+                Paletes de Madeira
+              </h2>
+            </div>
+
+            <div>
+              <a 
+                href="https://wa.me/5549999999999?text=Olá!%20Gostaria%20de%20solicitar%20cotação%20para%20Paletes%20de%20Madeira." 
+                target="_blank" 
+                class="w-full inline-flex items-center justify-center gap-2.5 py-3.5 px-6 rounded-2xl bg-eco-600 hover:bg-eco-700 text-white font-heading font-bold text-sm sm:text-base shadow-md hover:shadow-lg transition-all"
+              >
+                <i data-lucide="message-circle" class="w-4 h-4 sm:w-5 sm:h-5"></i>
+                <span>Solicitar Cotação</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- PRODUTO 2: CHAPAS DE EUCATEX (FIBRA DE MADEIRA) -->
+        <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-eco-200/80 flex flex-col sm:flex-row items-stretch sm:h-[240px] lg:h-[250px]">
+          <!-- Foto na esquerda (quadrada de acordo com a altura disponível no bloco) -->
+          <div class="w-full sm:w-auto h-64 sm:h-full aspect-square shrink-0 overflow-hidden relative bg-eco-50">
+            <img 
+              src="assets/chapa-eucatex.jpg" 
+              alt="Chapas de Eucatex (Chapas de Fibra de Madeira)" 
+              class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+            />
+          </div>
+
+          <!-- Título e botão na direita -->
+          <div class="p-6 sm:p-7 flex-1 flex flex-col justify-between gap-4">
+            <div>
+              <h2 class="font-heading font-extrabold text-xl sm:text-2xl text-slate-900 leading-snug">
+                Chapas de Eucatex (Chapas de Fibra de Madeira)
+              </h2>
+            </div>
+
+            <div>
+              <a 
+                href="https://wa.me/5549999999999?text=Olá!%20Gostaria%20de%20solicitar%20cotação%20para%20Chapas%20de%20Eucatex%20(Chapas%20de%20Fibra%20de%20Madeira)." 
+                target="_blank" 
+                class="w-full inline-flex items-center justify-center gap-2.5 py-3.5 px-6 rounded-2xl bg-eco-600 hover:bg-eco-700 text-white font-heading font-bold text-sm sm:text-base shadow-md hover:shadow-lg transition-all"
+              >
+                <i data-lucide="message-circle" class="w-4 h-4 sm:w-5 sm:h-5"></i>
+                <span>Solicitar Cotação</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="bg-eco-deep text-slate-400 pt-12 pb-8 border-t border-eco-900 text-xs">
+    <div class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 pb-10 border-b border-white/10 text-center sm:text-left">
+        
+        <!-- Coluna 1: Logo & Slogan -->
+        <div class="space-y-3 flex flex-col items-center sm:items-start">
+          <img src="assets/logo-white.png" alt="Melvale" class="h-9 sm:h-10 w-auto object-contain" />
+          <p data-cms="footer_slogan" class="leading-relaxed text-slate-300 text-pretty">
+            Gestão Sustentável de<br />Paletes e Resíduos de Madeira.
+          </p>
+        </div>
+
+        <!-- Coluna 2: Menu -->
+        <div>
+          <h4 class="font-heading font-bold text-white uppercase text-xs tracking-wider mb-3">Menu</h4>
+          <ul class="space-y-2 sm:space-y-1.5">
+            <li><a href="index.html" class="hover:text-white transition-colors py-1 block sm:inline">Início</a></li>
+            <li><a href="index.html#como-funciona" class="hover:text-white transition-colors py-1 block sm:inline">Como Funciona</a></li>
+            <li><a href="index.html#beneficios" class="hover:text-white transition-colors py-1 block sm:inline">Benefícios</a></li>
+            <li><a href="filiais.html" class="hover:text-white transition-colors py-1 block sm:inline">Nossas Filiais</a></li>
+            <li><a href="produtos.html" class="hover:text-white transition-colors py-1 block sm:inline">Nossos Produtos</a></li>
+            <li><a href="contato.html" class="hover:text-white transition-colors py-1 block sm:inline">Contato</a></li>
+            <li><a href="admin.html" class="hover:text-white transition-colors py-1 block sm:inline">Login</a></li>
+          </ul>
+        </div>
+
+        <!-- Coluna 3: Nossas Unidades -->
+        <div>
+          <h4 class="font-heading font-bold text-white uppercase text-xs tracking-wider mb-3">Nossas Unidades</h4>
+          <ul class="space-y-2 sm:space-y-1.5 text-slate-300">
+            <li>Luzerna/SC</li>
+            <li>Maravilha/SC</li>
+            <li>Uberlândia/MG</li>
+            <li>Bom Princípio/RS</li>
+            <li>Aparecida de Goiânia/GO</li>
+          </ul>
+        </div>
+
+        <!-- Coluna 4: Contato -->
+        <div>
+          <h4 class="font-heading font-bold text-white uppercase text-xs tracking-wider mb-3">Contato</h4>
+          <ul class="space-y-3 sm:space-y-2.5 text-slate-300 flex flex-col items-center sm:items-start">
+            <li class="flex items-center gap-2.5">
+              <i data-lucide="phone" class="w-4 h-4 text-eco-400 shrink-0"></i>
+              <a href="tel:0030000000" data-cms="footer_phone" class="hover:text-white transition-colors py-0.5">(00) 3000-0000</a>
+            </li>
+            <li class="flex items-center gap-2.5">
+              <i data-lucide="message-circle" class="w-4 h-4 text-eco-400 shrink-0"></i>
+              <a href="https://wa.me/5500930000000" data-cms="footer_whatsapp" target="_blank" class="hover:text-white transition-colors py-0.5">(00) 93000-0000</a>
+            </li>
+            <li class="flex items-center gap-2.5 pt-1">
+              <i data-lucide="mail" class="w-4 h-4 text-eco-400 shrink-0"></i>
+              <a href="mailto:contato@melvale.com.br" data-cms="footer_email" class="hover:text-white transition-colors break-all py-0.5">contato@melvale.com.br</a>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="pt-6 text-center text-slate-500 text-pretty">
+        <p>© 2026 Melvale - Gestão Sustentável de Paletes e Resíduos de Madeira. Todos os direitos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/content.js"></script>
+  <script>
+    lucide.createIcons();
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    function toggleMobileMenu() {
+      mobileMenu.classList.toggle('hidden');
+    }
+    mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+  </script>
+
+</body>
+</html>

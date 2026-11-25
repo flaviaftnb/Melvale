@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contato | Melvale - Gestão Sustentável de Paletes</title>
+  <meta name="description" content="Nosso Compromisso com Sua Empresa. Entre em contato conosco." />
+  
+  <!-- Google Fonts: Plus Jakarta Sans & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            heading: ['"Outfit"', 'sans-serif'],
+          },
+          colors: {
+            eco: {
+              50: '#F4F8F3',
+              100: '#E7F2E5',
+              200: '#CEE3CA',
+              300: '#A9CFA3',
+              400: '#7CB573',
+              500: '#589B4E',
+              600: '#447D3B',
+              700: '#35632F',
+              800: '#1b2436',
+              900: '#111723',
+              dark: '#111723',
+              deep: '#111723',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Tipografia responsiva e prevenção de viúvas */
+    h1, h2, h3, h4, h5, h6, .text-balance {
+      text-wrap: balance;
+      -webkit-text-wrap: balance;
+    }
+    p, li, .text-pretty {
+      text-wrap: pretty;
+      -webkit-text-wrap: pretty;
+    }
+    html {
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+    body {
+      overflow-x: hidden;
+      width: 100%;
+    }
+    .touch-target {
+      min-height: 48px;
+    }
+  </style>
+</head>
+<body class="bg-[#F8FAF7] text-slate-800 antialiased font-sans selection:bg-eco-500 selection:text-white flex flex-col min-h-screen justify-between">
+
+  <!-- ================= MENU PRINCIPAL ================= -->
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-eco-100 shadow-sm transition-all">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 sm:h-20">
+        
+        <!-- Logo Melvale -->
+        <a href="index.html" class="flex items-center group">
+          <img src="assets/logo.png" alt="Melvale" class="h-8 sm:h-11 w-auto object-contain transition-transform group-hover:scale-105" />
+        </a>
+
+        <!-- Desktop Navigation Menu -->
+        <nav class="hidden md:flex items-center gap-7 text-[15px] font-medium text-slate-700">
+          <a href="index.html" class="hover:text-eco-600 transition-colors pb-1">Início</a>
+          <a href="index.html#como-funciona" class="hover:text-eco-600 transition-colors pb-1">Como Funciona</a>
+          <a href="index.html#beneficios" class="hover:text-eco-600 transition-colors pb-1">Benefícios</a>
+          <a href="filiais.html" class="hover:text-eco-600 transition-colors pb-1">Nossas Filiais</a>
+          <a href="produtos.html" class="hover:text-eco-600 transition-colors pb-1">Nossos Produtos</a>
+        </nav>
+
+        <!-- Right CTA Button -->
+        <div class="hidden sm:flex items-center">
+          <a href="contato.html" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-eco-600 hover:bg-eco-700 text-white font-semibold text-sm shadow-md hover:shadow-lg transition-all touch-target">
+            <i data-lucide="message-square" class="w-4 h-4"></i>
+            <span>Entrar em Contato</span>
+          </a>
+        </div>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button id="mobileMenuBtn" aria-label="Abrir Menu" class="md:hidden p-2.5 rounded-2xl text-slate-700 hover:bg-eco-50 active:bg-eco-100 focus:outline-none transition-colors touch-target flex items-center justify-center">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+
+      </div>
+    </div>
+
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobileMenu" class="hidden md:hidden border-t border-eco-100 bg-white/98 backdrop-blur-md px-5 pt-3 pb-6 space-y-2 shadow-2xl">
+      <a href="index.html" class="flex items-center justify-between px-4 py-3 rounded-2xl text-base font-semibold text-slate-800 hover:bg-eco-50 active:bg-eco-100 transition-colors touch-target">
+        <span>Início</span>
+        <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+      </a>
+      <a href="index.html#como-funciona" class="flex items-center justify-between px-4 py-3 rounded-2xl text-base font-semibold text-slate-800 hover:bg-eco-50 active:bg-eco-100 transition-colors touch-target">
+        <span>Como Funciona</span>
+        <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+      </a>
+      <a href="index.html#beneficios" class="flex items-center justify-between px-4 py-3 rounded-2xl text-base font-semibold text-slate-800 hover:bg-eco-50 active:bg-eco-100 transition-colors touch-target">
+        <span>Benefícios</span>
+        <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+      </a>
+      <a href="filiais.html" class="flex items-center justify-between px-4 py-3 rounded-2xl text-base font-semibold text-slate-800 hover:bg-eco-50 active:bg-eco-100 transition-colors touch-target">
+        <span>Nossas Filiais</span>
+        <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+      </a>
+      <a href="produtos.html" class="flex items-center justify-between px-4 py-3 rounded-2xl text-base font-semibold text-slate-800 hover:bg-eco-50 active:bg-eco-100 transition-colors touch-target">
+        <span>Nossos Produtos</span>
+        <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+      </a>
+      <a href="contato.html" class="flex items-center justify-center gap-2 w-full px-5 py-3.5 rounded-2xl bg-eco-600 active:bg-eco-700 text-white font-semibold text-base shadow-md mt-3 touch-target">
+        <i data-lucide="message-square" class="w-4 h-4"></i>
+        <span>Entrar em Contato</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- ================= BANNER / HEADER DA PÁGINA ================= -->
+  <section class="bg-eco-dark text-white py-14 sm:py-20 relative overflow-hidden">
+    <div class="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-30" style="background-image: url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=95&w=2560&auto=format&fit=crop');"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-[#111723]/80 via-[#111723]/70 to-[#111723]"></div>
+    <div class="relative max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 text-center space-y-3 sm:space-y-4">
+      <h1 data-cms="contato_banner_title" class="font-heading font-extrabold text-2xl sm:text-4xl lg:text-5xl text-white tracking-tight text-balance">
+        Entre em contato conosco
+      </h1>
+      <p data-cms="contato_banner_desc" class="text-slate-300 text-sm sm:text-base lg:text-lg max-w-2xl mx-auto text-pretty">
+        Descubra como podemos ajudar sua empresa a manter ambientes mais limpos, seguros e ambientalmente responsáveis.
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= CONTEÚDO DA PÁGINA 4 — CONTATO ================= -->
+  <main class="py-14 sm:py-20 bg-[#F8FAF7] flex-1">
+    <div class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+        
+        <!-- Coluna Esquerda: Copy Exata do Usuário -->
+        <div class="lg:col-span-6 space-y-6">
+          <h2 data-cms="contato_compromisso_title" class="font-heading font-extrabold text-2xl sm:text-3xl lg:text-4xl text-eco-900 tracking-tight leading-tight text-center lg:text-left text-balance">
+            Nosso Compromisso<br class="hidden sm:inline" /> com Sua Empresa
+          </h2>
+
+          <div class="space-y-4 text-slate-700 text-sm sm:text-base leading-relaxed text-pretty">
+            <div class="flex items-start gap-3">
+              <div class="w-6 h-6 rounded-full bg-eco-100 text-eco-700 flex items-center justify-center shrink-0 mt-0.5">
+                <i data-lucide="check" class="w-4 h-4"></i>
+              </div>
+              <p>Cada palete retirado representa mais espaço, mais organização e menos riscos para sua operação.</p>
+            </div>
+
+            <div class="flex items-start gap-3">
+              <div class="w-6 h-6 rounded-full bg-eco-100 text-eco-700 flex items-center justify-center shrink-0 mt-0.5">
+                <i data-lucide="check" class="w-4 h-4"></i>
+              </div>
+              <p>Cada material reaproveitado representa menos desperdício e menos danos ambientais.</p>
+            </div>
+
+            <div class="flex items-start gap-3">
+              <div class="w-6 h-6 rounded-full bg-eco-100 text-eco-700 flex items-center justify-center shrink-0 mt-0.5">
+                <i data-lucide="check" class="w-4 h-4"></i>
+              </div>
+              <p>Cada resíduo reciclado representa um benefício para o meio ambiente.</p>
+            </div>
+
+            <p class="pt-2 text-slate-800">
+              Nosso compromisso é oferecer uma solução completa, transformando resíduos de madeira em oportunidades de reaproveitamento, sustentabilidade e valor para nossos clientes.
+            </p>
+          </div>
+
+          <div class="bg-eco-50 rounded-2xl p-5 sm:p-6 border border-eco-200/80 space-y-2 text-center lg:text-left">
+            <h3 class="font-heading font-bold text-base sm:text-lg text-eco-900 text-balance">Entre em contato conosco</h3>
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed text-pretty">
+              Descubra como podemos ajudar sua empresa a manter ambientes mais limpos, seguros e ambientalmente responsáveis.
+            </p>
+          </div>
+        </div>
+
+        <!-- Coluna Direita: Formulário com CTA Solicitar Atendimento -->
+        <div class="lg:col-span-6">
+          <div class="bg-white p-6 sm:p-10 rounded-3xl border border-eco-200 shadow-xl">
+            
+            <form onsubmit="handleFormSubmit(event)" class="space-y-4">
+              
+              <div>
+                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1" for="name">Nome Completo</label>
+                <input type="text" id="name" required placeholder="Seu nome" class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-eco-500 focus:ring-2 focus:ring-eco-500/20 outline-none text-base sm:text-sm transition-all" />
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1" for="company">Empresa</label>
+                  <input type="text" id="company" required placeholder="Nome da empresa" class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-eco-500 focus:ring-2 focus:ring-eco-500/20 outline-none text-base sm:text-sm transition-all" />
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1" for="city">Cidade / Estado</label>
+                  <input type="text" id="city" required placeholder="Cidade - UF" class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-eco-500 focus:ring-2 focus:ring-eco-500/20 outline-none text-base sm:text-sm transition-all" />
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1" for="email">E-mail</label>
+                  <input type="email" id="email" required placeholder="seu@email.com" class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-eco-500 focus:ring-2 focus:ring-eco-500/20 outline-none text-base sm:text-sm transition-all" />
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1" for="phone">Telefone / WhatsApp</label>
+                  <input type="tel" id="phone" required placeholder="(00) 00000-0000" class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-eco-500 focus:ring-2 focus:ring-eco-500/20 outline-none text-base sm:text-sm transition-all" />
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1" for="message">Mensagem</label>
+                <textarea id="message" rows="4" placeholder="Mensagem..." class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-eco-500 focus:ring-2 focus:ring-eco-500/20 outline-none text-base sm:text-sm transition-all"></textarea>
+              </div>
+
+              <!-- Botão CTA Exato -->
+              <button type="submit" class="w-full py-4 rounded-xl bg-eco-600 hover:bg-eco-700 active:scale-[0.99] text-white font-heading font-extrabold text-base shadow-lg transition-all flex items-center justify-center gap-2 touch-target">
+                <i data-lucide="send" class="w-5 h-5"></i>
+                <span>Solicitar Atendimento</span>
+              </button>
+
+              <div id="formSuccess" class="hidden p-4 rounded-xl bg-emerald-100 border border-emerald-300 text-emerald-800 text-xs sm:text-sm font-semibold flex items-center gap-2">
+                <i data-lucide="check-circle" class="w-5 h-5 text-emerald-600 shrink-0"></i>
+                <span>Solicitação enviada com sucesso!</span>
+              </div>
+
+            </form>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="bg-eco-deep text-slate-400 pt-12 pb-8 border-t border-eco-900 text-xs">
+    <div class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 pb-10 border-b border-white/10 text-center sm:text-left">
+        
+        <!-- Coluna 1: Logo & Slogan -->
+        <div class="space-y-3 flex flex-col items-center sm:items-start">
+          <img src="assets/logo-white.png" alt="Melvale" class="h-9 sm:h-10 w-auto object-contain" />
+          <p data-cms="footer_slogan" class="leading-relaxed text-slate-300 text-pretty">
+            Gestão Sustentável de<br />Paletes e Resíduos de Madeira.
+          </p>
+        </div>
+
+        <!-- Coluna 2: Menu -->
+        <div>
+          <h4 class="font-heading font-bold text-white uppercase text-xs tracking-wider mb-3">Menu</h4>
+          <ul class="space-y-2 sm:space-y-1.5">
+            <li><a href="index.html" class="hover:text-white transition-colors py-1 block sm:inline">Início</a></li>
+            <li><a href="index.html#como-funciona" class="hover:text-white transition-colors py-1 block sm:inline">Como Funciona</a></li>
+            <li><a href="index.html#beneficios" class="hover:text-white transition-colors py-1 block sm:inline">Benefícios</a></li>
+            <li><a href="filiais.html" class="hover:text-white transition-colors py-1 block sm:inline">Nossas Filiais</a></li>
+            <li><a href="produtos.html" class="hover:text-white transition-colors py-1 block sm:inline">Nossos Produtos</a></li>
+            <li><a href="contato.html" class="hover:text-white transition-colors py-1 block sm:inline">Contato</a></li>
+            <li><a href="admin.html" class="hover:text-white transition-colors py-1 block sm:inline">Login</a></li>
+          </ul>
+        </div>
+
+        <!-- Coluna 3: Nossas Unidades -->
+        <div>
+          <h4 class="font-heading font-bold text-white uppercase text-xs tracking-wider mb-3">Nossas Unidades</h4>
+          <ul class="space-y-2 sm:space-y-1.5 text-slate-300">
+            <li>Luzerna/SC</li>
+            <li>Maravilha/SC</li>
+            <li>Uberlândia/MG</li>
+            <li>Bom Princípio/RS</li>
+            <li>Aparecida de Goiânia/GO</li>
+          </ul>
+        </div>
+
+        <!-- Coluna 4: Contato -->
+        <div>
+          <h4 class="font-heading font-bold text-white uppercase text-xs tracking-wider mb-3">Contato</h4>
+          <ul class="space-y-3 sm:space-y-2.5 text-slate-300 flex flex-col items-center sm:items-start">
+            <li class="flex items-center gap-2.5">
+              <i data-lucide="phone" class="w-4 h-4 text-eco-400 shrink-0"></i>
+              <a href="tel:0030000000" data-cms="footer_phone" class="hover:text-white transition-colors py-0.5">(00) 3000-0000</a>
+            </li>
+            <li class="flex items-center gap-2.5">
+              <i data-lucide="message-circle" class="w-4 h-4 text-eco-400 shrink-0"></i>
+              <a href="https://wa.me/5500930000000" data-cms="footer_whatsapp" target="_blank" class="hover:text-white transition-colors py-0.5">(00) 93000-0000</a>
+            </li>
+            <li class="flex items-center gap-2.5 pt-1">
+              <i data-lucide="mail" class="w-4 h-4 text-eco-400 shrink-0"></i>
+              <a href="mailto:contato@melvale.com.br" data-cms="footer_email" class="hover:text-white transition-colors break-all py-0.5">contato@melvale.com.br</a>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="pt-6 text-center text-slate-500 text-pretty">
+        <p>© 2026 Melvale - Gestão Sustentável de Paletes e Resíduos de Madeira. Todos os direitos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/content.js"></script>
+  <script>
+    lucide.createIcons();
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    function toggleMobileMenu() {
+      mobileMenu.classList.toggle('hidden');
+    }
+    mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      document.getElementById('formSuccess').classList.remove('hidden');
+      setTimeout(() => {
+        document.getElementById('formSuccess').classList.add('hidden');
+      }, 5000);
+    }
+  </script>
+
+</body>
+</html>

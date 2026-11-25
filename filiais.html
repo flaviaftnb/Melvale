@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nossas Filiais | Melvale - Gestão Sustentável de Paletes</title>
+  <meta name="description" content="Conheça nossas unidades e saiba onde estamos presentes." />
+  
+  <!-- Google Fonts: Plus Jakarta Sans & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            heading: ['"Outfit"', 'sans-serif'],
+          },
+          colors: {
+            eco: {
+              50: '#F4F8F3',
+              100: '#E7F2E5',
+              200: '#CEE3CA',
+              300: '#A9CFA3',
+              400: '#7CB573',
+              500: '#589B4E',
+              600: '#447D3B',
+              700: '#35632F',
+              800: '#1b2436',
+              900: '#111723',
+              dark: '#111723',
+              deep: '#111723',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Tipografia responsiva e prevenção de viúvas */
+    h1, h2, h3, h4, h5, h6, .text-balance {
+      text-wrap: balance;
+      -webkit-text-wrap: balance;
+    }
+    p, li, .text-pretty {
+      text-wrap: pretty;
+      -webkit-text-wrap: pretty;
+    }
+    html {
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+    body {
+      overflow-x: hidden;
+      width: 100%;
+    }
+    .touch-target {
+      min-height: 48px;
+    }
+    .leaflet-popup-content-wrapper {
+      border-radius: 1rem;
+      box-shadow: 0 15px 35px -5px rgba(20, 38, 18, 0.2);
+      padding: 4px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-[#F8FAF7] text-slate-800 antialiased font-sans selection:bg-eco-500 selection:text-white flex flex-col min-h-screen justify-between">
+
+  <!-- ================= MENU PRINCIPAL ================= -->
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-eco-100 shadow-sm transition-all">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 sm:h-20">
+        
+        <!-- Logo Melvale -->
+        <a href="index.html" class="flex items-center group">
+          <img src="assets/logo.png" alt="Melvale" class="h-8 sm:h-11 w-auto object-contain transition-transform group-hover:scale-105" />
+        </a>
+
+        <!-- Desktop Navigation Menu -->
+        <nav class="hidden md:flex items-center gap-7 text-[15px] font-medium text-slate-700">
+          <a href="index.html" class="hover:text-eco-600 transition-colors pb-1">Início</a>
+          <a href="index.html#como-funciona" class="hover:text-eco-600 transition-colors pb-1">Como Funciona</a>
+          <a href="index.html#beneficios" class="hover:text-eco-600 transition-colors pb-1">Benefícios</a>
+          <a href="filiais.html" class="text-eco-700 font-bold border-b-2 border-eco-600 pb-1">Nossas Filiais</a>
+          <a href="produtos.html" class="hover:text-eco-600 transition-colors pb-1">Nossos Produtos</a>
+        </nav>
+
+        <!-- Right CTA Button -->
+        <div class="hidden sm:flex items-center">
+          <a href="contato.html" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-eco-600 hover:bg-eco-700 text-white font-semibold text-sm shadow-md hover:shadow-lg transition-all touch-target">
+            <i data-lucide="message-square" class="w-4 h-4"></i>
+            <span>Entrar em Contato</span>
+          </a>
+        </div>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button id="mobileMenuBtn" aria-label="Abrir Menu" class="md:hidden p-2.5 rounded-2xl text-slate-700 hover:bg-eco-50 active:bg-eco-100 focus:outline-none transition-colors touch-target flex items-center justify-center">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+
+      </div>
+    </div>
+
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobileMenu" class="hidden md:hidden border-t border-eco-100 bg-white/98 backdrop-blur-md px-5 pt-3 pb-6 space-y-2 shadow-2xl">
+      <a href="index.html" class="flex items-center justify-between px-4 py-3 rounded-2xl text-base font-semibold text-slate-800 hover:bg-eco-50 active:bg-eco-100 transition-colors touch-target">
+        <span>Início</span>
+        <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+      </a>
+      <a href="index.html#como-funciona" class="flex items-center justify-between px-4 py-3 rounded-2xl text-base font-semibold text-slate-800 hover:bg-eco-50 active:bg-eco-100 transition-colors touch-target">
+        <span>Como Funciona</span>
+        <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+      </a>
+      <a href="index.html#beneficios" class="flex items-center justify-between px-4 py-3 rounded-2xl text-base font-semibold text-slate-800 hover:bg-eco-50 active:bg-eco-100 transition-colors touch-target">
+        <span>Benefícios</span>
+        <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+      </a>
+      <a href="filiais.html" class="flex items-center justify-between px-4 py-3 rounded-2xl text-base font-bold text-eco-700 bg-eco-50 touch-target">
+        <span>Nossas Filiais</span>
+        <i data-lucide="chevron-right" class="w-4 h-4 text-eco-600"></i>
+      </a>
+      <a href="produtos.html" class="flex items-center justify-between px-4 py-3 rounded-2xl text-base font-semibold text-slate-800 hover:bg-eco-50 active:bg-eco-100 transition-colors touch-target">
+        <span>Nossos Produtos</span>
+        <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+      </a>
+      <a href="contato.html" class="flex items-center justify-center gap-2 w-full px-5 py-3.5 rounded-2xl bg-eco-600 active:bg-eco-700 text-white font-semibold text-base shadow-md mt-3 touch-target">
+        <i data-lucide="message-square" class="w-4 h-4"></i>
+        <span>Entrar em Contato</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- ================= BANNER / HEADER DA PÁGINA ================= -->
+  <section class="bg-eco-dark text-white py-14 sm:py-20 lg:py-24 relative overflow-hidden">
+    <div class="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-30" style="background-image: url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=95&w=2560&auto=format&fit=crop');"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-[#111723]/80 via-[#111723]/70 to-[#111723]"></div>
+    <div class="relative max-w-4xl mx-auto px-5 sm:px-6 lg:px-8 text-center space-y-4 sm:space-y-5">
+      <h1 data-cms="filiais_header_title" class="font-heading font-extrabold text-2xl sm:text-4xl lg:text-5xl text-white tracking-tight text-balance">
+        Nossas Filiais
+      </h1>
+      <p data-cms="filiais_intro_p1" class="text-slate-300 text-xs sm:text-sm lg:text-base font-normal leading-relaxed max-w-3xl mx-auto text-pretty">
+        Com uma estrutura presente em diferentes estados, nossa empresa fortalece sua atuação, ampliando a proximidade com clientes e parceiros. Trabalhamos de forma integrada, compartilhando os mesmos valores e o compromisso com a qualidade, a confiança e a excelência em nossos serviços. Nossa Matriz e nossas filiais formam uma rede integrada, refletindo o crescimento da empresa e nosso compromisso com cada região em que estamos presentes.
+      </p>
+      <p data-cms="filiais_intro_p2" class="text-slate-300 text-xs sm:text-sm lg:text-base font-normal leading-relaxed max-w-3xl mx-auto text-pretty">
+        Cada unidade tem um papel importante nessa trajetória, contribuindo para o crescimento da empresa e para um atendimento cada vez mais próximo e eficiente.
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= CONTEÚDO PRINCIPAL: COPY & MAPA ================= -->
+  <main class="py-14 sm:py-20 lg:py-28 bg-[#F8FAF7] flex-1">
+    <div class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 space-y-12 sm:space-y-16">
+      
+      <!-- Cabeçalho das Unidades -->
+      <div class="max-w-4xl mx-auto text-center pb-2 lg:pb-6">
+        <h2 data-cms="filiais_map_title" class="font-heading font-extrabold text-2xl sm:text-4xl lg:text-5xl text-eco-900 tracking-tight leading-tight text-balance">
+          Conheça nossas unidades e saiba onde estamos presentes:
+        </h2>
+      </div>
+
+      <!-- Grid com Lista de Unidades e Mapa Interativo -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-start">
+        
+        <!-- Lista das 5 Unidades -->
+        <div class="lg:col-span-5 space-y-3">
+          
+          <!-- Unidade Luzerna/SC -->
+          <button 
+            type="button"
+            onclick="focusBranch('luzerna')" 
+            id="branch-btn-luzerna"
+            class="branch-card w-full text-left p-4 sm:p-5 rounded-2xl border-2 border-eco-500 bg-eco-50/90 transition-all hover:shadow-md flex items-center justify-between group touch-target"
+          >
+            <div>
+              <h3 class="font-heading font-bold text-base text-slate-900">Luzerna/SC</h3>
+            </div>
+            <i data-lucide="chevron-right" class="w-5 h-5 text-eco-600 group-hover:translate-x-1 transition-transform"></i>
+          </button>
+
+          <!-- Unidade Maravilha/SC -->
+          <button 
+            type="button"
+            onclick="focusBranch('maravilha')" 
+            id="branch-btn-maravilha"
+            class="branch-card w-full text-left p-4 sm:p-5 rounded-2xl border border-eco-200 bg-white transition-all hover:bg-eco-50/50 hover:shadow-md flex items-center justify-between group touch-target"
+          >
+            <div>
+              <h3 class="font-heading font-bold text-base text-slate-900">Maravilha/SC</h3>
+            </div>
+            <i data-lucide="chevron-right" class="w-5 h-5 text-slate-400 group-hover:translate-x-1 transition-transform"></i>
+          </button>
+
+          <!-- Unidade Uberlândia/MG -->
+          <button 
+            type="button"
+            onclick="focusBranch('uberlandia')" 
+            id="branch-btn-uberlandia"
+            class="branch-card w-full text-left p-4 sm:p-5 rounded-2xl border border-eco-200 bg-white transition-all hover:bg-eco-50/50 hover:shadow-md flex items-center justify-between group touch-target"
+          >
+            <div>
+              <h3 class="font-heading font-bold text-base text-slate-900">Uberlândia/MG</h3>
+            </div>
+            <i data-lucide="chevron-right" class="w-5 h-5 text-slate-400 group-hover:translate-x-1 transition-transform"></i>
+          </button>
+
+          <!-- Unidade Bom Princípio/RS -->
+          <button 
+            type="button"
+            onclick="focusBranch('bomprincipio')" 
+            id="branch-btn-bomprincipio"
+            class="branch-card w-full text-left p-4 sm:p-5 rounded-2xl border border-eco-200 bg-white transition-all hover:bg-eco-50/50 hover:shadow-md flex items-center justify-between group touch-target"
+          >
+            <div>
+              <h3 class="font-heading font-bold text-base text-slate-900">Bom Princípio/RS</h3>
+            </div>
+            <i data-lucide="chevron-right" class="w-5 h-5 text-slate-400 group-hover:translate-x-1 transition-transform"></i>
+          </button>
+
+          <!-- Unidade Aparecida de Goiânia/GO -->
+          <button 
+            type="button"
+            onclick="focusBranch('goiania')" 
+            id="branch-btn-goiania"
+            class="branch-card w-full text-left p-4 sm:p-5 rounded-2xl border border-eco-200 bg-white transition-all hover:bg-eco-50/50 hover:shadow-md flex items-center justify-between group touch-target"
+          >
+            <div>
+              <h3 class="font-heading font-bold text-base text-slate-900">Aparecida de Goiânia/GO</h3>
+            </div>
+            <i data-lucide="chevron-right" class="w-5 h-5 text-slate-400 group-hover:translate-x-1 transition-transform"></i>
+          </button>
+
+        </div>
+
+        <!-- Mapa do Google Maps -->
+        <div id="mapSection" class="lg:col-span-7">
+          <div class="bg-white rounded-3xl p-4 sm:p-6 shadow-xl border border-eco-200 space-y-4">
+            
+            <!-- Barra de Status da Unidade Selecionada -->
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-slate-100">
+              <div class="flex items-center gap-2.5">
+                <span class="w-3 h-3 rounded-full bg-eco-500 animate-pulse"></span>
+                <span id="currentBranchName" class="font-heading font-bold text-base text-[#111723]">
+                  Luzerna/SC
+                </span>
+              </div>
+              <a 
+                id="openGoogleMapsBtn" 
+                href="https://maps.google.com/?q=Luzerna,SC,Brasil" 
+                target="_blank" 
+                class="inline-flex items-center gap-1.5 text-xs text-eco-600 hover:text-eco-700 font-semibold transition-colors py-1"
+              >
+                <span>Abrir no Google Maps</span>
+                <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+              </a>
+            </div>
+
+            <!-- Iframe do Google Maps -->
+            <div class="w-full h-[320px] sm:h-[480px] rounded-2xl overflow-hidden border border-slate-200 shadow-inner bg-slate-100">
+              <iframe 
+                id="googleMapIframe" 
+                src="https://maps.google.com/maps?q=Luzerna,SC,Brasil&t=&z=13&ie=UTF8&iwloc=&output=embed" 
+                width="100%" 
+                height="100%" 
+                style="border:0;" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade"
+                class="w-full h-full"
+              ></iframe>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="bg-eco-deep text-slate-400 pt-12 pb-8 border-t border-eco-900 text-xs">
+    <div class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 pb-10 border-b border-white/10 text-center sm:text-left">
+        
+        <!-- Coluna 1: Logo & Slogan -->
+        <div class="space-y-3 flex flex-col items-center sm:items-start">
+          <img src="assets/logo-white.png" alt="Melvale" class="h-9 sm:h-10 w-auto object-contain" />
+          <p data-cms="footer_slogan" class="leading-relaxed text-slate-300 text-pretty">
+            Gestão Sustentável de<br />Paletes e Resíduos de Madeira.
+          </p>
+        </div>
+
+        <!-- Coluna 2: Menu -->
+        <div>
+          <h4 class="font-heading font-bold text-white uppercase text-xs tracking-wider mb-3">Menu</h4>
+          <ul class="space-y-2 sm:space-y-1.5">
+            <li><a href="index.html" class="hover:text-white transition-colors py-1 block sm:inline">Início</a></li>
+            <li><a href="index.html#como-funciona" class="hover:text-white transition-colors py-1 block sm:inline">Como Funciona</a></li>
+            <li><a href="index.html#beneficios" class="hover:text-white transition-colors py-1 block sm:inline">Benefícios</a></li>
+            <li><a href="filiais.html" class="hover:text-white transition-colors py-1 block sm:inline">Nossas Filiais</a></li>
+            <li><a href="produtos.html" class="hover:text-white transition-colors py-1 block sm:inline">Nossos Produtos</a></li>
+            <li><a href="contato.html" class="hover:text-white transition-colors py-1 block sm:inline">Contato</a></li>
+            <li><a href="admin.html" class="hover:text-white transition-colors py-1 block sm:inline">Login</a></li>
+          </ul>
+        </div>
+
+        <!-- Coluna 3: Nossas Unidades -->
+        <div>
+          <h4 class="font-heading font-bold text-white uppercase text-xs tracking-wider mb-3">Nossas Unidades</h4>
+          <ul class="space-y-2 sm:space-y-1.5 text-slate-300">
+            <li>Luzerna/SC</li>
+            <li>Maravilha/SC</li>
+            <li>Uberlândia/MG</li>
+            <li>Bom Princípio/RS</li>
+            <li>Aparecida de Goiânia/GO</li>
+          </ul>
+        </div>
+
+        <!-- Coluna 4: Contato -->
+        <div>
+          <h4 class="font-heading font-bold text-white uppercase text-xs tracking-wider mb-3">Contato</h4>
+          <ul class="space-y-3 sm:space-y-2.5 text-slate-300 flex flex-col items-center sm:items-start">
+            <li class="flex items-center gap-2.5">
+              <i data-lucide="phone" class="w-4 h-4 text-eco-400 shrink-0"></i>
+              <a href="tel:0030000000" data-cms="footer_phone" class="hover:text-white transition-colors py-0.5">(00) 3000-0000</a>
+            </li>
+            <li class="flex items-center gap-2.5">
+              <i data-lucide="message-circle" class="w-4 h-4 text-eco-400 shrink-0"></i>
+              <a href="https://wa.me/5500930000000" data-cms="footer_whatsapp" target="_blank" class="hover:text-white transition-colors py-0.5">(00) 93000-0000</a>
+            </li>
+            <li class="flex items-center gap-2.5 pt-1">
+              <i data-lucide="mail" class="w-4 h-4 text-eco-400 shrink-0"></i>
+              <a href="mailto:contato@melvale.com.br" data-cms="footer_email" class="hover:text-white transition-colors break-all py-0.5">contato@melvale.com.br</a>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="pt-6 text-center text-slate-500 text-pretty">
+        <p>© 2026 Melvale - Gestão Sustentável de Paletes e Resíduos de Madeira. Todos os direitos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/content.js"></script>
+  <script>
+    lucide.createIcons();
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    function toggleMobileMenu() {
+      mobileMenu.classList.toggle('hidden');
+    }
+    mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+
+    const branches = {
+      luzerna: {
+        name: "Luzerna/SC",
+        query: "Luzerna, SC, Brasil",
+        zoom: 13,
+        mapsUrl: "https://maps.google.com/?q=Luzerna,SC,Brasil"
+      },
+      maravilha: {
+        name: "Maravilha/SC",
+        query: "Maravilha, SC, Brasil",
+        zoom: 13,
+        mapsUrl: "https://maps.google.com/?q=Maravilha,SC,Brasil"
+      },
+      uberlandia: {
+        name: "Uberlândia/MG",
+        query: "Uberlandia, MG, Brasil",
+        zoom: 12,
+        mapsUrl: "https://maps.google.com/?q=Uberlandia,MG,Brasil"
+      },
+      bomprincipio: {
+        name: "Bom Princípio/RS",
+        query: "Bom Principio, RS, Brasil",
+        zoom: 13,
+        mapsUrl: "https://maps.google.com/?q=Bom+Principio,RS,Brasil"
+      },
+      goiania: {
+        name: "Aparecida de Goiânia/GO",
+        query: "Aparecida de Goiania, GO, Brasil",
+        zoom: 12,
+        mapsUrl: "https://maps.google.com/?q=Aparecida+de+Goiania,GO,Brasil"
+      }
+    };
+
+    function focusBranch(key) {
+      const branch = branches[key];
+      if (!branch) return;
+
+      const iframe = document.getElementById('googleMapIframe');
+      const nameEl = document.getElementById('currentBranchName');
+      const linkEl = document.getElementById('openGoogleMapsBtn');
+
+      if (iframe) {
+        iframe.src = `https://maps.google.com/maps?q=${encodeURIComponent(branch.query)}&t=&z=${branch.zoom}&ie=UTF8&iwloc=&output=embed`;
+      }
+      if (nameEl) {
+        nameEl.textContent = branch.name;
+      }
+      if (linkEl) {
+        linkEl.href = branch.mapsUrl;
+      }
+
+      document.querySelectorAll('.branch-card').forEach(card => {
+        card.classList.remove('border-2', 'border-eco-500', 'bg-eco-50/90');
+        card.classList.add('border', 'border-eco-200', 'bg-white');
+        const icon = card.querySelector('i');
+        if (icon) {
+          icon.classList.remove('text-eco-600');
+          icon.classList.add('text-slate-400');
+        }
+      });
+
+      const activeCard = document.getElementById(`branch-btn-${key}`);
+      if (activeCard) {
+        activeCard.classList.remove('border', 'border-eco-200', 'bg-white');
+        activeCard.classList.add('border-2', 'border-eco-500', 'bg-eco-50/90');
+        const icon = activeCard.querySelector('i');
+        if (icon) {
+          icon.classList.remove('text-slate-400');
+          icon.classList.add('text-eco-600');
+        }
+      }
+
+      // No mobile, rola suavemente até o mapa para feedback imediato
+      if (window.innerWidth < 1024) {
+        const mapEl = document.getElementById('mapSection');
+        if (mapEl) {
+          mapEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      }
+    }
+  </script>
+
+</body>
+</html>

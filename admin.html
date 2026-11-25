@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Painel Administrativo - Melvale</title>
+  <link rel="icon" type="image/png" href="assets/logo.png" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            heading: ['"Outfit"', 'sans-serif'],
+          },
+          colors: {
+            eco: {
+              50: '#F4F8F3',
+              100: '#E7F2E5',
+              200: '#CEE3CA',
+              300: '#A9CFA3',
+              400: '#7CB573',
+              500: '#589B4E',
+              600: '#447D3B',
+              700: '#35632F',
+              800: '#1b2436',
+              900: '#111723',
+              dark: '#111723',
+              deep: '#111723',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Tipografia responsiva e toque mobile */
+    h1, h2, h3, h4, h5, h6, .text-balance {
+      text-wrap: balance;
+      -webkit-text-wrap: balance;
+    }
+    p, li, .text-pretty {
+      text-wrap: pretty;
+      -webkit-text-wrap: pretty;
+    }
+    html {
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+    body {
+      overflow-x: hidden;
+      width: 100%;
+    }
+    .touch-target {
+      min-height: 48px;
+    }
+  </style>
+</head>
+<body class="bg-[#F8FAF7] text-slate-800 antialiased font-sans min-h-screen flex flex-col">
+
+  <!-- ================= TELA DE LOGIN ================= -->
+  <div id="loginSection" class="min-h-screen flex items-center justify-center p-4 bg-[#111723]">
+    <div class="w-full max-w-md bg-white rounded-3xl p-8 sm:p-10 shadow-2xl space-y-8 border border-slate-100">
+      
+      <div class="text-center space-y-3">
+        <div class="inline-flex items-center justify-center mb-2">
+          <img src="assets/logo.png" alt="Melvale" class="h-12 w-auto object-contain" />
+        </div>
+        <h1 class="font-heading font-extrabold text-2xl text-[#111723]">Painel Administrativo</h1>
+        <p class="text-sm text-slate-500">Faça login para gerenciar textos e produtos do site</p>
+      </div>
+
+      <form id="loginForm" onsubmit="handleLogin(event)" class="space-y-5">
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-2">Usuário</label>
+          <div class="relative">
+            <i data-lucide="user" class="w-5 h-5 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2"></i>
+            <input 
+              type="text" 
+              id="loginUser" 
+              required 
+              placeholder="admin" 
+              class="w-full pl-12 pr-4 py-3.5 rounded-2xl bg-slate-50 border border-slate-200 text-slate-800 font-medium focus:outline-none focus:ring-2 focus:ring-eco-500 focus:bg-white text-sm"
+            />
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-2">Senha</label>
+          <div class="relative">
+            <i data-lucide="lock" class="w-5 h-5 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2"></i>
+            <input 
+              type="password" 
+              id="loginPassword" 
+              required 
+              placeholder="••••••••" 
+              class="w-full pl-12 pr-4 py-3.5 rounded-2xl bg-slate-50 border border-slate-200 text-slate-800 font-medium focus:outline-none focus:ring-2 focus:ring-eco-500 focus:bg-white text-sm"
+            />
+          </div>
+        </div>
+
+        <div id="loginError" class="hidden p-3 rounded-xl bg-red-50 border border-red-200 text-red-600 text-xs font-semibold flex items-center gap-2">
+          <i data-lucide="alert-circle" class="w-4 h-4 shrink-0"></i>
+          <span>Usuário ou senha inválidos.</span>
+        </div>
+
+        <button 
+          type="submit" 
+          class="w-full py-4 rounded-2xl bg-eco-600 hover:bg-eco-700 text-white font-heading font-bold text-base shadow-lg shadow-eco-600/30 transition-all flex items-center justify-center gap-2"
+        >
+          <span>Acessar Painel</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================= PAINEL PRINCIPAL ================= -->
+  <div id="dashboardSection" class="hidden flex-1 flex flex-col">
+    
+    <!-- Topbar -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-20">
+          
+          <div class="flex items-center gap-4">
+            <a href="index.html" target="_blank" class="flex items-center">
+              <img src="assets/logo.png" alt="Melvale" class="h-10 w-auto object-contain" />
+            </a>
+            <span class="hidden sm:inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-eco-100 text-eco-800">
+              Admin CMS
+            </span>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <a 
+              href="index.html" 
+              target="_blank" 
+              class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-slate-200 hover:bg-slate-50 text-slate-700 text-xs sm:text-sm font-semibold transition-all"
+            >
+              <i data-lucide="external-link" class="w-4 h-4 text-eco-600"></i>
+              <span class="hidden sm:inline">Ver Site ao Vivo</span>
+            </a>
+
+            <button 
+              onclick="handleLogout()" 
+              class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-red-50 hover:text-red-600 text-slate-700 text-xs sm:text-sm font-semibold transition-all"
+            >
+              <i data-lucide="log-out" class="w-4 h-4"></i>
+              <span class="hidden sm:inline">Sair</span>
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </header>
+
+    <!-- Subheader / Tabs -->
+    <nav class="bg-white border-b border-slate-200 sticky top-20 z-30">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center gap-2 sm:gap-4 overflow-x-auto py-2">
+          <button 
+            onclick="switchTab('texts')" 
+            id="tabBtn-texts" 
+            class="tab-btn px-4 py-2.5 rounded-xl text-sm font-bold flex items-center gap-2 bg-eco-600 text-white transition-all whitespace-nowrap shadow-sm"
+          >
+            <i data-lucide="file-text" class="w-4 h-4"></i>
+            <span>Textos do Site</span>
+          </button>
+          
+          <button 
+            onclick="switchTab('products')" 
+            id="tabBtn-products" 
+            class="tab-btn px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-all whitespace-nowrap flex items-center gap-2"
+          >
+            <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+            <span>Loja / Produtos</span>
+          </button>
+
+          <button 
+            onclick="switchTab('security')" 
+            id="tabBtn-security" 
+            class="tab-btn px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-all whitespace-nowrap flex items-center gap-2"
+          >
+            <i data-lucide="shield-check" class="w-4 h-4"></i>
+            <span>Segurança & Senha</span>
+          </button>
+
+          <button 
+            onclick="switchTab('settings')" 
+            id="tabBtn-settings" 
+            class="tab-btn px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-all whitespace-nowrap flex items-center gap-2"
+          >
+            <i data-lucide="sliders" class="w-4 h-4"></i>
+            <span>Backup & Exportar</span>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Conteúdo Principal -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full space-y-8 pb-32">
+      
+      <!-- ================= ABA 1: TEXTOS DO SITE ================= -->
+      <div id="tabContent-texts" class="space-y-8">
+        
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <h2 class="font-heading font-extrabold text-2xl text-slate-900">Editar Textos do Site</h2>
+            <p class="text-sm text-slate-500">Altere qualquer informação. Ao salvar, as mudanças são aplicadas no site imediatamente.</p>
+          </div>
+          <button 
+            onclick="saveAllTexts()" 
+            class="self-start sm:self-auto inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-eco-600 hover:bg-eco-700 text-white font-heading font-bold text-sm shadow-md hover:shadow-lg transition-all"
+          >
+            <i data-lucide="save" class="w-4 h-4"></i>
+            <span>Salvar Alterações</span>
+          </button>
+        </div>
+
+        <form id="textsForm" class="space-y-8">
+          
+          <!-- SEÇÃO 1: HERO (PÁGINA INICIAL) -->
+          <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-sm space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+              <div class="w-10 h-10 rounded-xl bg-eco-50 text-eco-700 flex items-center justify-center font-bold">
+                <i data-lucide="home" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <h3 class="font-heading font-bold text-lg text-slate-900">Página Inicial — Primeira Dobra (Hero)</h3>
+                <p class="text-xs text-slate-500">Título central, subtítulo e texto principal da home</p>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 gap-5">
+              <div>
+                <label class="block text-xs font-bold uppercase text-slate-600 mb-1.5">Título do Hero</label>
+                <input type="text" id="cms-hero_title" class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 text-sm focus:bg-white focus:ring-2 focus:ring-eco-500" />
+                <span class="text-[11px] text-slate-400">Suporta tag &lt;br&gt; para quebra de linha.</span>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold uppercase text-slate-600 mb-1.5">Subtítulo do Hero</label>
+                <input type="text" id="cms-hero_subtitle" class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 text-sm focus:bg-white focus:ring-2 focus:ring-eco-500" />
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold uppercase text-slate-600 mb-1.5">Texto Explicativo (Conteúdo)</label>
+                <textarea id="cms-hero_desc" rows="3" class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 text-sm focus:bg-white focus:ring-2 focus:ring-eco-500 leading-relaxed"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- SEÇÃO 2: NOSSA MISSÃO E COMPROMISSO -->
+          <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-sm space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+              <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center font-bold">
+                <i data-lucide="shield-check" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <h3 class="font-heading font-bold text-lg text-slate-900">Nossa Missão & Nosso Compromisso Ambiental</h3>
+                <p class="text-xs text-slate-500">Blocos lado a lado da segunda dobra</p>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <!-- Bloco Missão -->
+              <div class="space-y-4 bg-slate-50/70 p-5 rounded-2xl border border-slate-200/60">
+                <span class="text-xs font-bold uppercase text-eco-700">Bloco 1 — Nossa Missão</span>
+                <div>
+                  <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Título</label>
+                  <input type="text" id="cms-missao_title" class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-sm" />
+                </div>
+                <div>
+                  <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Subtítulo</label>
+                  <input type="text" id="cms-missao_subtitle" class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-sm" />
+                </div>
+                <div>
+                  <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Descrição</label>
+                  <textarea id="cms-missao_desc" rows="4" class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-sm leading-relaxed"></textarea>
+                </div>
+              </div>
+
+              <!-- Bloco Compromisso -->
+              <div class="space-y-4 bg-blue-50/40 p-5 rounded-2xl border border-blue-200/60">
+                <span class="text-xs font-bold uppercase text-blue-800">Bloco 2 — Compromisso Ambiental</span>
+                <div>
+                  <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Título</label>
+                  <input type="text" id="cms-compromisso_title" class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-sm" />
+                </div>
+                <div>
+                  <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Subtítulo</label>
+                  <input type="text" id="cms-compromisso_subtitle" class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-sm" />
+                </div>
+                <div>
+                  <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Parágrafo 1</label>
+                  <textarea id="cms-compromisso_p1" rows="2" class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-sm leading-relaxed"></textarea>
+                </div>
+                <div>
+                  <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Parágrafo 2</label>
+                  <textarea id="cms-compromisso_p2" rows="2" class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-sm leading-relaxed"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SEÇÃO 3: TRÊS PILARES -->
+          <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-sm space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+              <div class="w-10 h-10 rounded-xl bg-eco-50 text-eco-700 flex items-center justify-center font-bold">
+                <i data-lucide="layers" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <h3 class="font-heading font-bold text-lg text-slate-900">Três Pilares de Atuação</h3>
+                <p class="text-xs text-slate-500">Cards escuros de Reaproveitamento, Reciclagem e Destinação Final</p>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold uppercase text-slate-600 mb-1.5">Título da Seção de Pilares</label>
+              <input type="text" id="cms-pilares_title" class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 text-sm" />
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+              <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
+                <span class="text-xs font-bold uppercase text-eco-700">Pilar 1</span>
+                <input type="text" id="cms-pilar_reaproveitamento_title" class="w-full px-3 py-2 rounded-lg bg-white border border-slate-200 text-sm font-bold" />
+                <textarea id="cms-pilar_reaproveitamento_desc" rows="3" class="w-full px-3 py-2 rounded-lg bg-white border border-slate-200 text-xs leading-relaxed"></textarea>
+              </div>
+
+              <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
+                <span class="text-xs font-bold uppercase text-eco-700">Pilar 2</span>
+                <input type="text" id="cms-pilar_reciclagem_title" class="w-full px-3 py-2 rounded-lg bg-white border border-slate-200 text-sm font-bold" />
+                <textarea id="cms-pilar_reciclagem_desc" rows="3" class="w-full px-3 py-2 rounded-lg bg-white border border-slate-200 text-xs leading-relaxed"></textarea>
+              </div>
+
+              <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
+                <span class="text-xs font-bold uppercase text-eco-700">Pilar 3</span>
+                <input type="text" id="cms-pilar_destinacao_title" class="w-full px-3 py-2 rounded-lg bg-white border border-slate-200 text-sm font-bold" />
+                <textarea id="cms-pilar_destinacao_desc" rows="3" class="w-full px-3 py-2 rounded-lg bg-white border border-slate-200 text-xs leading-relaxed"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- SEÇÃO 4: COMO FUNCIONA -->
+          <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-sm space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+              <div class="w-10 h-10 rounded-xl bg-eco-50 text-eco-700 flex items-center justify-center font-bold">
+                <i data-lucide="cogs" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <h3 class="font-heading font-bold text-lg text-slate-900">Como Funciona Nosso Trabalho</h3>
+                <p class="text-xs text-slate-500">Processos de Reaproveitamento, Reciclagem Energética e Destinação</p>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div>
+                <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Título da Seção</label>
+                <input type="text" id="cms-comofunciona_title" class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-sm" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Parágrafo 1</label>
+                <input type="text" id="cms-comofunciona_p1" class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-sm" />
+              </div>
+              <div class="sm:col-span-2">
+                <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Parágrafo 2</label>
+                <input type="text" id="cms-comofunciona_p2" class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-sm" />
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5 pt-3">
+              <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+                <span class="text-xs font-bold text-eco-700">Etapa 1: Reaproveitamento</span>
+                <input type="text" id="cms-cf_p1_subtitle" class="w-full px-3 py-2 rounded-lg bg-white border border-slate-200 text-xs font-bold" />
+                <textarea id="cms-cf_p1_text1" rows="3" class="w-full px-3 py-2 rounded-lg bg-white border border-slate-200 text-xs"></textarea>
+                <textarea id="cms-cf_p1_text2" rows="3" class="w-full px-3 py-2 rounded-lg bg-white border border-slate-200 text-xs"></textarea>
+              </div>
+
+              <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+                <span class="text-xs font-bold text-eco-700">Etapa 2: Reciclagem Energética</span>
+                <input type="text" id="cms-cf_p2_title" class="w-full px-3 py-2 rounded-lg bg-white border border-slate-200 text-xs font-bold" />
+                <textarea id="cms-cf_p2_text1" rows="3" class="w-full px-3 py-2 rounded-lg bg-white border border-slate-200 text-xs"></textarea>
+                <textarea id="cms-cf_p2_text2" rows="3" class="w-full px-3 py-2 rounded-lg bg-white border border-slate-200 text-xs"></textarea>
+              </div>
+
+              <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+                <span class="text-xs font-bold text-eco-700">Etapa 3: Destinação Final</span>
+                <input type="text" id="cms-cf_p3_title" class="w-full px-3 py-2 rounded-lg bg-white border border-slate-200 text-xs font-bold" />
+                <textarea id="cms-cf_p3_text1" rows="6" class="w-full px-3 py-2 rounded-lg bg-white border border-slate-200 text-xs"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- SEÇÃO 5: INFORMAÇÕES DE CONTATO E RODAPÉ -->
+          <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-sm space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+              <div class="w-10 h-10 rounded-xl bg-eco-50 text-eco-700 flex items-center justify-center font-bold">
+                <i data-lucide="phone-call" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <h3 class="font-heading font-bold text-lg text-slate-900">Contatos e Telefones do Rodapé</h3>
+                <p class="text-xs text-slate-500">Atualiza os canais de contato de todas as páginas simultaneamente</p>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+              <div>
+                <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Telefone Fixo</label>
+                <input type="text" id="cms-footer_phone" class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-sm" placeholder="(00) 3000-0000" />
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold uppercase text-slate-600 mb-1">WhatsApp</label>
+                <input type="text" id="cms-footer_whatsapp" class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-sm" placeholder="(00) 93000-0000" />
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold uppercase text-slate-600 mb-1">E-mail</label>
+                <input type="email" id="cms-footer_email" class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-sm" placeholder="contato@melvale.com.br" />
+              </div>
+            </div>
+          </div>
+
+        </form>
+
+      </div>
+
+      <!-- ================= ABA 2: LOJA / PRODUTOS ================= -->
+      <div id="tabContent-products" class="hidden space-y-8">
+        
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <h2 class="font-heading font-extrabold text-2xl text-slate-900">Gerenciar Produtos da Loja</h2>
+            <p class="text-sm text-slate-500">Adicione novos itens, edite títulos, fotos ou remova produtos.</p>
+          </div>
+
+          <button 
+            onclick="openProductModal()" 
+            class="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-eco-600 hover:bg-eco-700 text-white font-heading font-bold text-sm shadow-md hover:shadow-lg transition-all"
+          >
+            <i data-lucide="plus-circle" class="w-5 h-5"></i>
+            <span>Adicionar Novo Produto</span>
+          </button>
+        </div>
+
+        <!-- Lista de Produtos Cadastrados -->
+        <div id="adminProductsGrid" class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <!-- Gerado dinamicamente -->
+        </div>
+
+      </div>
+
+      <!-- ================= ABA 3: SEGURANÇA & ALTERAR SENHA ================= -->
+      <div id="tabContent-security" class="hidden space-y-8">
+        <div>
+          <h2 class="font-heading font-extrabold text-2xl text-slate-900">Segurança & Alteração de Senha</h2>
+          <p class="text-sm text-slate-500">Gerencie a sua senha de acesso ao Painel Administrativo da Melvale.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          <!-- Formulário de Alteração de Senha -->
+          <div class="lg:col-span-7 bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6">
+            <div class="flex items-center gap-3 pb-2 border-b border-slate-100">
+              <div class="w-10 h-10 rounded-xl bg-eco-100 text-eco-700 flex items-center justify-center font-bold">
+                <i data-lucide="key-round" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <h3 class="font-heading font-bold text-lg text-slate-900">Alterar Senha do Administrador</h3>
+                <p class="text-xs text-slate-500">Defina uma nova senha para proteger o seu painel</p>
+              </div>
+            </div>
+
+            <form id="changePasswordForm" onsubmit="handleChangePassword(event)" class="space-y-4">
+              <div>
+                <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Usuário</label>
+                <input 
+                  type="text" 
+                  value="admin" 
+                  disabled 
+                  class="w-full px-4 py-3 rounded-xl bg-slate-100 border border-slate-200 text-sm text-slate-500 font-mono cursor-not-allowed" 
+                />
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Senha Atual</label>
+                <div class="relative">
+                  <input 
+                    type="password" 
+                    id="currentPassword" 
+                    required 
+                    placeholder="Digite sua senha atual" 
+                    class="w-full pl-4 pr-10 py-3 rounded-xl bg-slate-50 border border-slate-200 text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-eco-500" 
+                  />
+                  <button type="button" onclick="togglePasswordVisibility('currentPassword', this)" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600">
+                    <i data-lucide="eye" class="w-4 h-4"></i>
+                  </button>
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Nova Senha</label>
+                <div class="relative">
+                  <input 
+                    type="password" 
+                    id="newPassword" 
+                    required 
+                    placeholder="Digite a nova senha (mínimo 6 caracteres)" 
+                    class="w-full pl-4 pr-10 py-3 rounded-xl bg-slate-50 border border-slate-200 text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-eco-500" 
+                  />
+                  <button type="button" onclick="togglePasswordVisibility('newPassword', this)" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600">
+                    <i data-lucide="eye" class="w-4 h-4"></i>
+                  </button>
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Confirmar Nova Senha</label>
+                <div class="relative">
+                  <input 
+                    type="password" 
+                    id="confirmPassword" 
+                    required 
+                    placeholder="Confirme a nova senha" 
+                    class="w-full pl-4 pr-10 py-3 rounded-xl bg-slate-50 border border-slate-200 text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-eco-500" 
+                  />
+                  <button type="button" onclick="togglePasswordVisibility('confirmPassword', this)" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600">
+                    <i data-lucide="eye" class="w-4 h-4"></i>
+                  </button>
+                </div>
+              </div>
+
+              <div id="passwordError" class="hidden p-3 rounded-xl bg-red-50 border border-red-200 text-red-600 text-xs font-semibold flex items-center gap-2">
+                <i data-lucide="alert-circle" class="w-4 h-4 shrink-0"></i>
+                <span id="passwordErrorMsg">Erro ao alterar senha.</span>
+              </div>
+
+              <div id="passwordSuccess" class="hidden p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-semibold flex items-center gap-2">
+                <i data-lucide="check-circle" class="w-4 h-4 shrink-0"></i>
+                <span>Senha atualizada com sucesso! Use a nova senha no próximo login.</span>
+              </div>
+
+              <div class="pt-2">
+                <button 
+                  type="submit" 
+                  class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-eco-600 hover:bg-eco-700 text-white font-heading font-bold text-sm shadow-md transition-all flex items-center justify-center gap-2"
+                >
+                  <i data-lucide="shield-check" class="w-4 h-4"></i>
+                  <span>Salvar Nova Senha</span>
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Informações de Segurança -->
+          <div class="lg:col-span-5 space-y-6">
+            <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm space-y-4">
+              <div class="w-10 h-10 rounded-xl bg-slate-100 text-slate-700 flex items-center justify-center font-bold">
+                <i data-lucide="info" class="w-5 h-5 text-eco-600"></i>
+              </div>
+              <h4 class="font-heading font-bold text-base text-slate-900">Como funciona o armazenamento</h4>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                A nova senha cadastrada é gravada no armazenamento seguro do seu navegador (<code class="bg-slate-100 px-1 py-0.5 rounded text-slate-800">localStorage</code>). Ao acessar o painel em novos acessos neste navegador, a nova senha será exigida.
+              </p>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                <strong>Credenciais Padrão Iniciais:</strong><br />
+                Login: <span class="font-mono text-slate-800">admin</span><br />
+                Senha: <span class="font-mono text-slate-800">Melvale@2026**admin</span>
+              </p>
+            </div>
+
+            <div class="bg-amber-50/70 rounded-3xl p-6 border border-amber-200/80 space-y-3">
+              <h4 class="font-heading font-bold text-sm text-amber-900 flex items-center gap-2">
+                <i data-lucide="alert-triangle" class="w-4 h-4 text-amber-600"></i>
+                <span>Esqueceu a senha?</span>
+              </h4>
+              <p class="text-xs text-amber-800 leading-relaxed">
+                Você pode restaurar as credenciais originais a qualquer momento clicando no botão abaixo:
+              </p>
+              <button 
+                type="button" 
+                onclick="handleResetAuthDefault()" 
+                class="px-4 py-2.5 rounded-xl bg-white hover:bg-amber-100 text-amber-900 text-xs font-bold border border-amber-300 transition-colors inline-flex items-center gap-2"
+              >
+                <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+                <span>Restaurar Senha Padrão</span>
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ================= ABA 4: BACKUP & CONFIGURAÇÕES ================= -->
+      <div id="tabContent-settings" class="hidden space-y-8">
+        <div>
+          <h2 class="font-heading font-extrabold text-2xl text-slate-900">Backup & Sincronização Permanente</h2>
+          <p class="text-sm text-slate-500">Suas alterações já estão salvas e ativas no navegador. Você também pode exportar os arquivos para o servidor.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          
+          <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+            <div class="w-12 h-12 rounded-2xl bg-eco-100 text-eco-700 flex items-center justify-center font-bold">
+              <i data-lucide="download-cloud" class="w-6 h-6"></i>
+            </div>
+            <h3 class="font-heading font-bold text-xl text-slate-900">Baixar content.js Atualizado</h3>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              Gera o arquivo de código com todas as alterações e produtos para salvar de forma permanente na pasta <code class="bg-slate-100 px-1 py-0.5 rounded text-xs">assets/js/content.js</code>.
+            </p>
+            <button 
+              onclick="downloadContentJS()" 
+              class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-slate-900 hover:bg-black text-white text-sm font-semibold transition-all"
+            >
+              <i data-lucide="download" class="w-4 h-4"></i>
+              <span>Baixar Arquivo content.js</span>
+            </button>
+          </div>
+
+          <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+            <div class="w-12 h-12 rounded-2xl bg-red-100 text-red-600 flex items-center justify-center font-bold">
+              <i data-lucide="rotate-ccw" class="w-6 h-6"></i>
+            </div>
+            <h3 class="font-heading font-bold text-xl text-slate-900">Restaurar Padrão da Copy</h3>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              Descarta as edições personalizadas e retorna todos os textos e produtos para os valores originais fornecidos.
+            </p>
+            <button 
+              onclick="handleResetDefaults()" 
+              class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-red-50 hover:bg-red-100 text-red-700 text-sm font-semibold transition-all border border-red-200"
+            >
+              <i data-lucide="alert-triangle" class="w-4 h-4"></i>
+              <span>Restaurar Padrões de Fábrica</span>
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+    </main>
+
+    <!-- Floating Save Bar (Barra Flutuante de Salvar) -->
+    <div class="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 bg-slate-900/90 backdrop-blur-md text-white px-6 py-4 rounded-3xl shadow-2xl border border-white/10 flex items-center gap-4">
+      <div class="hidden sm:flex items-center gap-2 text-xs text-slate-300">
+        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span>Site conectado ao vivo</span>
+      </div>
+      <button 
+        onclick="saveAllTexts()" 
+        class="inline-flex items-center gap-2 px-6 py-2.5 rounded-2xl bg-eco-600 hover:bg-eco-500 text-white font-heading font-bold text-sm shadow-md transition-all"
+      >
+        <i data-lucide="check-circle" class="w-4 h-4"></i>
+        <span>Salvar Alterações Agora</span>
+      </button>
+    </div>
+
+  </div>
+
+  <!-- ================= MODAL: ADICIONAR / EDITAR PRODUTO ================= -->
+  <div id="productModal" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl w-full max-w-lg p-6 sm:p-8 shadow-2xl space-y-6 max-h-[90vh] overflow-y-auto">
+      
+      <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+        <h3 id="modalTitle" class="font-heading font-bold text-xl text-slate-900">Novo Produto</h3>
+        <button onclick="closeProductModal()" class="p-2 rounded-xl text-slate-400 hover:bg-slate-100">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <form id="productForm" onsubmit="handleProductSubmit(event)" class="space-y-4">
+        <input type="hidden" id="prodEditId" value="" />
+
+        <div>
+          <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Título do Produto</label>
+          <input 
+            type="text" 
+            id="prodTitle" 
+            required 
+            placeholder="Ex: Paletes PBR Reformados" 
+            class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-sm focus:bg-white" 
+          />
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Foto do Produto (Quadrada)</label>
+          
+          <div class="flex items-center gap-4 mb-2">
+            <!-- Preview da foto -->
+            <div class="w-20 h-20 rounded-2xl overflow-hidden bg-slate-100 border border-slate-200 shrink-0">
+              <img id="prodImagePreview" src="assets/Paletes.webp" alt="Preview" class="w-full h-full object-cover" />
+            </div>
+
+            <div class="flex-1 space-y-2">
+              <label class="cursor-pointer inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold">
+                <i data-lucide="upload" class="w-4 h-4"></i>
+                <span>Enviar foto do computador</span>
+                <input type="file" id="prodImageFile" accept="image/*" class="hidden" onchange="handleImageUpload(event)" />
+              </label>
+              <p class="text-[11px] text-slate-400">Ou digite o caminho/URL da foto abaixo:</p>
+            </div>
+          </div>
+
+          <input 
+            type="text" 
+            id="prodImageUrl" 
+            placeholder="assets/Paletes.webp" 
+            class="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs" 
+            oninput="updateImagePreview(this.value)"
+          />
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Número do WhatsApp (com DDI e DDD)</label>
+          <input 
+            type="text" 
+            id="prodWhatsAppNumber" 
+            required 
+            placeholder="5549999999999" 
+            class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-sm focus:bg-white" 
+          />
+          <span class="text-[11px] text-slate-400">Apenas números. Ex: 5549999999999</span>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Mensagem Padrão do WhatsApp</label>
+          <textarea 
+            id="prodWhatsAppMsg" 
+            rows="2" 
+            placeholder="Olá! Gostaria de solicitar cotação para este produto." 
+            class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-sm focus:bg-white leading-relaxed"
+          ></textarea>
+        </div>
+
+        <div class="pt-4 flex items-center justify-end gap-3 border-t border-slate-100">
+          <button 
+            type="button" 
+            onclick="closeProductModal()" 
+            class="px-5 py-3 rounded-xl text-slate-600 hover:bg-slate-100 font-semibold text-sm"
+          >
+            Cancelar
+          </button>
+          
+          <button 
+            type="submit" 
+            class="px-6 py-3 rounded-xl bg-eco-600 hover:bg-eco-700 text-white font-heading font-bold text-sm shadow-md"
+          >
+            Salvar Produto
+          </button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+  <!-- Toast de Notificação -->
+  <div id="toastNotification" class="hidden fixed top-6 right-6 z-50 bg-slate-900 text-white px-5 py-4 rounded-2xl shadow-2xl flex items-center gap-3 border border-slate-700 transition-all">
+    <div class="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold">
+      <i data-lucide="check" class="w-5 h-5"></i>
+    </div>
+    <div>
+      <h4 class="font-bold text-sm">Sucesso!</h4>
+      <p id="toastMessage" class="text-xs text-slate-300">Alterações salvas e aplicadas ao vivo no site.</p>
+    </div>
+  </div>
+
+  <!-- Import CMS Core -->
+  <script src="assets/js/content.js"></script>
+
+  <script>
+    // ================= SESSÃO & CREDENCIAIS =================
+    const DEFAULT_AUTH = {
+      user: "admin",
+      pass: "Melvale@2026**admin"
+    };
+
+    function getAuthCredentials() {
+      try {
+        const saved = localStorage.getItem("melvale_admin_auth");
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          return { ...DEFAULT_AUTH, ...parsed };
+        }
+      } catch (e) {
+        console.warn("Erro ao ler credenciais do localStorage:", e);
+      }
+      return { ...DEFAULT_AUTH };
+    }
+
+    function checkAuth() {
+      const isAuth = sessionStorage.getItem("melvale_admin_logged") === "true";
+      if (isAuth) {
+        document.getElementById("loginSection").classList.add("hidden");
+        document.getElementById("dashboardSection").classList.remove("hidden");
+        loadCMSDataIntoForms();
+        renderAdminProducts();
+      } else {
+        document.getElementById("loginSection").classList.remove("hidden");
+        document.getElementById("dashboardSection").classList.add("hidden");
+      }
+      lucide.createIcons();
+    }
+
+    function handleLogin(e) {
+      e.preventDefault();
+      const user = document.getElementById("loginUser").value.trim();
+      const pass = document.getElementById("loginPassword").value.trim();
+      const creds = getAuthCredentials();
+
+      if (user === creds.user && pass === creds.pass) {
+        sessionStorage.setItem("melvale_admin_logged", "true");
+        document.getElementById("loginError").classList.add("hidden");
+        checkAuth();
+        showToast("Bem-vindo ao Painel Administrativo!");
+      } else {
+        document.getElementById("loginError").classList.remove("hidden");
+      }
+    }
+
+    function handleLogout() {
+      sessionStorage.removeItem("melvale_admin_logged");
+      checkAuth();
+    }
+
+    function togglePasswordVisibility(inputId, btn) {
+      const input = document.getElementById(inputId);
+      if (!input) return;
+      if (input.type === "password") {
+        input.type = "text";
+        btn.innerHTML = '<i data-lucide="eye-off" class="w-4 h-4"></i>';
+      } else {
+        input.type = "password";
+        btn.innerHTML = '<i data-lucide="eye" class="w-4 h-4"></i>';
+      }
+      lucide.createIcons();
+    }
+
+    function handleChangePassword(e) {
+      e.preventDefault();
+      const currentPass = document.getElementById("currentPassword").value;
+      const newPass = document.getElementById("newPassword").value;
+      const confirmPass = document.getElementById("confirmPassword").value;
+      const errBox = document.getElementById("passwordError");
+      const errMsg = document.getElementById("passwordErrorMsg");
+      const successBox = document.getElementById("passwordSuccess");
+
+      errBox.classList.add("hidden");
+      successBox.classList.add("hidden");
+
+      const creds = getAuthCredentials();
+
+      if (currentPass !== creds.pass) {
+        errMsg.textContent = "A senha atual digitada está incorreta.";
+        errBox.classList.remove("hidden");
+        lucide.createIcons();
+        return;
+      }
+
+      if (newPass.length < 6) {
+        errMsg.textContent = "A nova senha deve ter no mínimo 6 caracteres.";
+        errBox.classList.remove("hidden");
+        lucide.createIcons();
+        return;
+      }
+
+      if (newPass !== confirmPass) {
+        errMsg.textContent = "A confirmação de senha não confere com a nova senha digitada.";
+        errBox.classList.remove("hidden");
+        lucide.createIcons();
+        return;
+      }
+
+      creds.pass = newPass;
+      try {
+        localStorage.setItem("melvale_admin_auth", JSON.stringify(creds));
+        successBox.classList.remove("hidden");
+        document.getElementById("changePasswordForm").reset();
+        showToast("Senha alterada com sucesso!");
+      } catch (err) {
+        errMsg.textContent = "Erro ao salvar nova senha no navegador.";
+        errBox.classList.remove("hidden");
+      }
+      lucide.createIcons();
+    }
+
+    function handleResetAuthDefault() {
+      if (!confirm("Deseja redefinir a senha do painel para a senha padrão original (Melvale@2026**admin)?")) return;
+      localStorage.removeItem("melvale_admin_auth");
+      document.getElementById("passwordError")?.classList.add("hidden");
+      document.getElementById("passwordSuccess")?.classList.remove("hidden");
+      document.getElementById("changePasswordForm")?.reset();
+      showToast("Senha redefinida para o padrão original!");
+    }
+
+    // ================= NAVEGAÇÃO ENTRE ABAS =================
+    function switchTab(tab) {
+      ['texts', 'products', 'security', 'settings'].forEach(t => {
+        const content = document.getElementById(`tabContent-${t}`);
+        const btn = document.getElementById(`tabBtn-${t}`);
+        if (!content || !btn) return;
+        if (t === tab) {
+          content.classList.remove('hidden');
+          btn.className = "tab-btn px-4 py-2.5 rounded-xl text-sm font-bold flex items-center gap-2 bg-eco-600 text-white transition-all whitespace-nowrap shadow-sm";
+        } else {
+          content.classList.add('hidden');
+          btn.className = "tab-btn px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-all whitespace-nowrap flex items-center gap-2";
+        }
+      });
+      lucide.createIcons();
+    }
+
+    // ================= CARREGAR DADOS NO FORMULÁRIO DE TEXTOS =================
+    function loadCMSDataIntoForms() {
+      const data = MelvaleCMS.getContent();
+      Object.keys(data).forEach(key => {
+        const input = document.getElementById(`cms-${key}`);
+        if (input) {
+          input.value = data[key];
+        }
+      });
+    }
+
+    function saveAllTexts() {
+      const current = MelvaleCMS.getContent();
+      const updated = { ...current };
+
+      document.querySelectorAll("[id^='cms-']").forEach(input => {
+        const key = input.id.replace("cms-", "");
+        updated[key] = input.value;
+      });
+
+      // Atualiza versões limpas de telefone e whatsapp
+      if (updated.footer_phone) {
+        updated.footer_phone_clean = updated.footer_phone.replace(/\D/g, '');
+      }
+      if (updated.footer_whatsapp) {
+        updated.footer_whatsapp_clean = "55" + updated.footer_whatsapp.replace(/\D/g, '');
+      }
+
+      MelvaleCMS.saveContent(updated);
+      showToast("Textos atualizados e aplicados no site ao vivo!");
+    }
+
+    // ================= GERENCIAR PRODUTOS =================
+    function renderAdminProducts() {
+      const container = document.getElementById("adminProductsGrid");
+      if (!container) return;
+
+      const data = MelvaleCMS.getContent();
+      const products = data.products || [];
+
+      if (products.length === 0) {
+        container.innerHTML = `
+          <div class="col-span-full p-12 text-center bg-white rounded-3xl border border-dashed border-slate-300">
+            <i data-lucide="package-open" class="w-12 h-12 text-slate-400 mx-auto mb-3"></i>
+            <h4 class="font-bold text-slate-700">Nenhum produto cadastrado</h4>
+            <p class="text-xs text-slate-400 mt-1">Clique em "Adicionar Novo Produto" para começar.</p>
+          </div>
+        `;
+        lucide.createIcons();
+        return;
+      }
+
+      container.innerHTML = products.map((prod) => `
+        <div class="bg-white rounded-3xl p-5 border border-slate-200/90 shadow-sm flex flex-col sm:flex-row items-center gap-5 justify-between">
+          <div class="flex items-center gap-4 w-full sm:w-auto">
+            <div class="w-20 h-20 rounded-2xl overflow-hidden bg-slate-100 border border-slate-200 shrink-0">
+              <img src="${prod.image}" alt="${prod.title}" class="w-full h-full object-cover" onerror="this.src='assets/Paletes.webp'" />
+            </div>
+            <div class="space-y-1">
+              <h4 class="font-heading font-bold text-base text-slate-900">${prod.title}</h4>
+              <p class="text-xs text-slate-500">WhatsApp: <span class="font-mono">${prod.whatsappNumber}</span></p>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-2 w-full sm:w-auto justify-end border-t sm:border-t-0 pt-3 sm:pt-0">
+            <button 
+              onclick="editProduct(${prod.id})" 
+              class="p-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors"
+              title="Editar"
+            >
+              <i data-lucide="edit-3" class="w-4 h-4"></i>
+            </button>
+
+            <button 
+              onclick="deleteProduct(${prod.id})" 
+              class="p-2.5 rounded-xl bg-red-50 hover:bg-red-100 text-red-600 transition-colors"
+              title="Excluir"
+            >
+              <i data-lucide="trash-2" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </div>
+      `).join("");
+
+      lucide.createIcons();
+    }
+
+    function openProductModal(prod = null) {
+      document.getElementById("prodEditId").value = prod ? prod.id : "";
+      document.getElementById("prodTitle").value = prod ? prod.title : "";
+      document.getElementById("prodImageUrl").value = prod ? prod.image : "assets/Paletes.webp";
+      document.getElementById("prodImagePreview").src = prod ? prod.image : "assets/Paletes.webp";
+      document.getElementById("prodWhatsAppNumber").value = prod ? prod.whatsappNumber : "5549999999999";
+      document.getElementById("prodWhatsAppMsg").value = prod ? prod.whatsappMsg : "Olá! Gostaria de solicitar cotação para este produto.";
+      
+      document.getElementById("modalTitle").textContent = prod ? "Editar Produto" : "Novo Produto";
+      document.getElementById("productModal").classList.remove("hidden");
+      lucide.createIcons();
+    }
+
+    function closeProductModal() {
+      document.getElementById("productModal").classList.add("hidden");
+    }
+
+    function handleImageUpload(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        const base64 = evt.target.result;
+        document.getElementById("prodImageUrl").value = base64;
+        document.getElementById("prodImagePreview").src = base64;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function updateImagePreview(val) {
+      document.getElementById("prodImagePreview").src = val || "assets/Paletes.webp";
+    }
+
+    function handleProductSubmit(e) {
+      e.preventDefault();
+      const editId = document.getElementById("prodEditId").value;
+      const title = document.getElementById("prodTitle").value.trim();
+      const image = document.getElementById("prodImageUrl").value.trim() || "assets/Paletes.webp";
+      const whatsappNumber = document.getElementById("prodWhatsAppNumber").value.trim();
+      const whatsappMsg = document.getElementById("prodWhatsAppMsg").value.trim();
+
+      const data = MelvaleCMS.getContent();
+      data.products = data.products || [];
+
+      if (editId) {
+        // Editando existente
+        const idx = data.products.findIndex(p => p.id == editId);
+        if (idx !== -1) {
+          data.products[idx] = {
+            id: Number(editId),
+            title,
+            image,
+            whatsappNumber,
+            whatsappMsg
+          };
+        }
+      } else {
+        // Adicionando novo
+        const newId = Date.now();
+        data.products.push({
+          id: newId,
+          title,
+          image,
+          whatsappNumber,
+          whatsappMsg
+        });
+      }
+
+      MelvaleCMS.saveContent(data);
+      closeProductModal();
+      renderAdminProducts();
+      showToast(editId ? "Produto atualizado com sucesso!" : "Novo produto adicionado à loja!");
+    }
+
+    function editProduct(id) {
+      const data = MelvaleCMS.getContent();
+      const prod = (data.products || []).find(p => p.id == id);
+      if (prod) {
+        openProductModal(prod);
+      }
+    }
+
+    function deleteProduct(id) {
+      if (!confirm("Tem certeza que deseja remover este produto da loja?")) return;
+      const data = MelvaleCMS.getContent();
+      data.products = (data.products || []).filter(p => p.id != id);
+      MelvaleCMS.saveContent(data);
+      renderAdminProducts();
+      showToast("Produto removido com sucesso!");
+    }
+
+    // ================= BACKUP & EXPORTAR =================
+    function downloadContentJS() {
+      const current = MelvaleCMS.getContent();
+      const jsCode = `/**
+ * Melvale CMS - Arquivo de Conteúdo Estático Atualizado
+ * Exportado pelo Painel Administrativo em: ${new Date().toLocaleString('pt-BR')}
+ */
+
+const DEFAULT_CONTENT = ${JSON.stringify(current, null, 2)};
+
+${MelvaleCMS.toString ? MelvaleCMS.toString() : ''}
+`;
+      const blob = new Blob([jsCode], { type: "application/javascript;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "content.js";
+      a.click();
+      URL.revokeObjectURL(url);
+      showToast("Download do arquivo content.js iniciado!");
+    }
+
+    function handleResetDefaults() {
+      if (!confirm("Atenção: Isso irá resetar todos os textos e produtos para os dados originais da Melvale. Deseja continuar?")) return;
+      MelvaleCMS.resetContent();
+      loadCMSDataIntoForms();
+      renderAdminProducts();
+      showToast("Configurações originais restauradas!");
+    }
+
+    // ================= TOAST NOTIFICATION =================
+    function showToast(msg) {
+      const toast = document.getElementById("toastNotification");
+      document.getElementById("toastMessage").textContent = msg;
+      toast.classList.remove("hidden");
+      setTimeout(() => {
+        toast.classList.add("hidden");
+      }, 4000);
+      lucide.createIcons();
+    }
+
+    // Inicializar na carga da página
+    window.addEventListener("DOMContentLoaded", () => {
+      checkAuth();
+    });
+  </script>
+
+</body>
+</html>

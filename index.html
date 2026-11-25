@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Melvale | Gestão Sustentável de Paletes e Resíduos de Madeira</title>
+  <meta name="description" content="Gestão Sustentável de Paletes e Resíduos de Madeira. Coleta, reaproveitamento, reciclagem e destinação ambientalmente adequada." />
+  
+  <!-- Google Fonts: Plus Jakarta Sans & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            heading: ['"Outfit"', 'sans-serif'],
+          },
+          colors: {
+            eco: {
+              50: '#F4F8F3',
+              100: '#E7F2E5',
+              200: '#CEE3CA',
+              300: '#A9CFA3',
+              400: '#7CB573',
+              500: '#589B4E',
+              600: '#447D3B',
+              700: '#35632F',
+              800: '#1b2436',
+              900: '#111723',
+              dark: '#111723',
+              deep: '#111723',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Tipografia de alta precisão e prevenção de viúvas */
+    h1, h2, h3, h4, h5, h6, .text-balance {
+      text-wrap: balance;
+      -webkit-text-wrap: balance;
+    }
+    p, li, .text-pretty {
+      text-wrap: pretty;
+      -webkit-text-wrap: pretty;
+    }
+    html {
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+    body {
+      overflow-x: hidden;
+      width: 100%;
+    }
+    .touch-target {
+      min-height: 48px;
+    }
+  </style>
+</head>
+<body class="bg-[#F8FAF7] text-slate-800 antialiased font-sans selection:bg-eco-500 selection:text-white">
+
+  <!-- ================= MENU PRINCIPAL ================= -->
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-eco-100 shadow-sm transition-all">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 sm:h-20">
+        
+        <!-- Logo Melvale -->
+        <a href="index.html" class="flex items-center group">
+          <img src="assets/logo.png" alt="Melvale" class="h-8 sm:h-11 w-auto object-contain transition-transform group-hover:scale-105" />
+        </a>
+
+        <!-- Desktop Navigation Menu -->
+        <nav class="hidden md:flex items-center gap-7 text-[15px] font-medium text-slate-700">
+          <a href="index.html" class="text-eco-700 font-bold border-b-2 border-eco-600 pb-1">Início</a>
+          <a href="#como-funciona" class="hover:text-eco-600 transition-colors pb-1">Como Funciona</a>
+          <a href="#beneficios" class="hover:text-eco-600 transition-colors pb-1">Benefícios</a>
+          <a href="filiais.html" class="hover:text-eco-600 transition-colors pb-1">Nossas Filiais</a>
+          <a href="produtos.html" class="hover:text-eco-600 transition-colors pb-1">Nossos Produtos</a>
+        </nav>
+
+        <!-- Right CTA Button -->
+        <div class="hidden sm:flex items-center">
+          <a href="contato.html" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-eco-600 hover:bg-eco-700 text-white font-semibold text-sm shadow-md hover:shadow-lg transition-all touch-target">
+            <i data-lucide="message-square" class="w-4 h-4"></i>
+            <span>Entrar em Contato</span>
+          </a>
+        </div>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button id="mobileMenuBtn" aria-label="Abrir Menu" class="md:hidden p-2.5 rounded-2xl text-slate-700 hover:bg-eco-50 active:bg-eco-100 focus:outline-none transition-colors touch-target flex items-center justify-center">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+
+      </div>
+    </div>
+
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobileMenu" class="hidden md:hidden border-t border-eco-100 bg-white/98 backdrop-blur-md px-5 pt-3 pb-6 space-y-2 shadow-2xl">
+      <a href="index.html" class="flex items-center justify-between px-4 py-3 rounded-2xl text-base font-bold text-eco-700 bg-eco-50 touch-target">
+        <span>Início</span>
+        <i data-lucide="chevron-right" class="w-4 h-4 text-eco-600"></i>
+      </a>
+      <a href="#como-funciona" onclick="toggleMobileMenu()" class="flex items-center justify-between px-4 py-3 rounded-2xl text-base font-semibold text-slate-800 hover:bg-eco-50 active:bg-eco-100 transition-colors touch-target">
+        <span>Como Funciona</span>
+        <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+      </a>
+      <a href="#beneficios" onclick="toggleMobileMenu()" class="flex items-center justify-between px-4 py-3 rounded-2xl text-base font-semibold text-slate-800 hover:bg-eco-50 active:bg-eco-100 transition-colors touch-target">
+        <span>Benefícios</span>
+        <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+      </a>
+      <a href="filiais.html" class="flex items-center justify-between px-4 py-3 rounded-2xl text-base font-semibold text-slate-800 hover:bg-eco-50 active:bg-eco-100 transition-colors touch-target">
+        <span>Nossas Filiais</span>
+        <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+      </a>
+      <a href="produtos.html" class="flex items-center justify-between px-4 py-3 rounded-2xl text-base font-semibold text-slate-800 hover:bg-eco-50 active:bg-eco-100 transition-colors touch-target">
+        <span>Nossos Produtos</span>
+        <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+      </a>
+      <a href="contato.html" class="flex items-center justify-center gap-2 w-full px-5 py-3.5 rounded-2xl bg-eco-600 active:bg-eco-700 text-white font-semibold text-base shadow-md mt-3 touch-target">
+        <i data-lucide="message-square" class="w-4 h-4"></i>
+        <span>Entrar em Contato</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- ================= HERO ================= -->
+  <section class="relative overflow-hidden bg-eco-dark text-white pt-16 pb-20 sm:pt-20 sm:pb-24 lg:pt-28 lg:pb-32">
+    <!-- Imagem de fundo nítida em alta definição com gradiente de contraste -->
+    <div class="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-30" style="background-image: url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=95&w=2560&auto=format&fit=crop');"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-[#111723]/80 via-[#111723]/70 to-[#111723]"></div>
+    <div class="absolute -top-24 left-1/2 -translate-x-1/2 w-[42rem] h-[42rem] bg-eco-600/15 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="relative max-w-5xl mx-auto px-5 sm:px-6 lg:px-8 text-center space-y-6">
+      
+      <!-- Título ocupando 2 linhas com balanceamento anti-viúvas -->
+      <h1 data-cms="hero_title" class="font-heading font-extrabold text-2xl sm:text-4xl lg:text-5xl xl:text-6xl text-white tracking-tight leading-[1.2] max-w-4xl mx-auto text-balance">
+        Gestão Sustentável de Paletes<br class="hidden sm:inline" /> e Resíduos de Madeira
+      </h1>
+
+      <!-- Subtítulo em 1 linha com balanceamento -->
+      <h2 data-cms="hero_subtitle" class="text-base sm:text-xl lg:text-2xl text-eco-300 font-semibold leading-snug sm:leading-normal max-w-3xl mx-auto text-balance">
+        Transformando um problema operacional em uma solução ambiental
+      </h2>
+
+      <!-- Conteúdo em até 3 linhas -->
+      <p data-cms="hero_desc" class="text-sm sm:text-base lg:text-lg text-slate-300 font-normal leading-relaxed max-w-2xl mx-auto text-pretty">
+        Realizamos a coleta, o reaproveitamento, a reciclagem e a destinação ambientalmente adequada de paletes e resíduos de madeira, ajudando empresas a manterem ambientes mais limpos, organizados, seguros e alinhados às boas práticas ambientais.
+      </p>
+
+      <!-- Botões centralizados com toque generoso no mobile -->
+      <div class="pt-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3.5 sm:gap-4 max-w-md sm:max-w-none mx-auto">
+        <a href="contato.html" class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-2xl sm:rounded-full bg-eco-500 hover:bg-eco-400 active:scale-[0.99] text-white font-bold text-base shadow-xl shadow-eco-500/25 transition-all touch-target">
+          <i data-lucide="message-circle" class="w-5 h-5"></i>
+          <span>Entre em Contato</span>
+        </a>
+        
+        <a href="#como-funciona" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-2xl sm:rounded-full bg-white/10 hover:bg-white/20 active:bg-white/25 backdrop-blur-sm text-white font-semibold text-base border border-white/20 transition-all touch-target">
+          <span>Conheça Nosso Processo</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= NOSSA MISSÃO & NOSSO COMPROMISSO AMBIENTAL ================= -->
+  <section class="py-14 sm:py-20 lg:py-28 bg-white border-b border-eco-100">
+    <div class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 space-y-12 sm:space-y-16">
+      
+      <!-- Blocos Lado a Lado: Nossa Missão e Nosso Compromisso Ambiental -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-[20px] items-stretch">
+        
+        <!-- Nossa Missão -->
+        <div class="bg-[#F8FAFC] rounded-3xl p-6 sm:p-10 border border-slate-200/90 shadow-sm flex flex-col justify-between space-y-6">
+          <div class="space-y-4">
+            <h2 data-cms="missao_title" class="font-heading font-extrabold text-2xl sm:text-3xl text-eco-900 tracking-tight text-center sm:text-left text-balance">
+              Nossa Missão
+            </h2>
+            <h3 data-cms="missao_subtitle" class="text-base sm:text-xl font-bold text-[#1e3a5f] leading-snug text-center sm:text-left text-balance">
+              Soluções sustentáveis para empresas mais organizadas e responsáveis
+            </h3>
+            <p data-cms="missao_desc" class="text-slate-600 text-sm sm:text-base leading-relaxed text-pretty">
+              Promover soluções sustentáveis para a gestão de paletes e resíduos de madeira, contribuindo para a preservação ambiental, para a segurança sanitária das empresas e para o fortalecimento da economia circular por meio do reaproveitamento e da reciclagem de materiais.
+            </p>
+          </div>
+        </div>
+
+        <!-- Nosso Compromisso Ambiental -->
+        <div class="bg-[#F0F4FA] rounded-3xl p-6 sm:p-10 border border-blue-200/80 shadow-sm flex flex-col justify-between space-y-6">
+          <div class="space-y-4">
+            <h2 data-cms="compromisso_title" class="font-heading font-extrabold text-2xl sm:text-3xl text-eco-900 tracking-tight text-center sm:text-left text-balance">
+              Nosso Compromisso Ambiental
+            </h2>
+            <h3 data-cms="compromisso_subtitle" class="text-base sm:text-xl font-bold text-[#1b2a47] leading-snug text-center sm:text-left text-balance">
+              Sustentabilidade presente em<br class="hidden sm:inline" />todas as etapas do processo
+            </h3>
+            <p data-cms="compromisso_p1" class="text-slate-700 text-sm sm:text-base leading-relaxed text-pretty">
+              Resíduos não devem ser tratados como descarte, mas como recursos que podem retornar à cadeia produtiva de forma responsável.
+            </p>
+            <p data-cms="compromisso_p2" class="text-slate-700 text-sm sm:text-base leading-relaxed text-pretty">
+              Por isso, buscamos aproveitar ao máximo cada material coletado, reduzindo desperdícios e minimizando os impactos ambientais causados pelo descarte inadequado da madeira.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Nosso trabalho é baseado em três pilares -->
+      <div class="pt-8 sm:pt-16 pb-4 sm:pb-8 lg:pt-20 space-y-10 sm:space-y-12">
+        <h2 data-cms="pilares_title" class="font-heading font-extrabold text-2xl sm:text-4xl lg:text-5xl text-eco-900 tracking-tight text-center max-w-4xl mx-auto leading-tight text-balance">
+          Nosso trabalho é baseado em três pilares
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+          
+          <!-- Reaproveitamento -->
+          <div class="bg-[#111723] p-6 sm:p-8 rounded-3xl border border-slate-700/60 shadow-lg space-y-4 text-white flex flex-col items-center text-center sm:items-start sm:text-left">
+            <div class="w-12 h-12 rounded-2xl bg-eco-600 text-white flex items-center justify-center font-bold shadow-md mx-auto sm:mx-0">
+              <i data-lucide="refresh-cw" class="w-6 h-6"></i>
+            </div>
+            <h3 data-cms="pilar_reaproveitamento_title" class="font-heading font-bold text-xl text-white text-center sm:text-left text-balance">
+              Reaproveitamento
+            </h3>
+            <p data-cms="pilar_reaproveitamento_desc" class="text-slate-200 text-sm leading-relaxed text-pretty">
+              Reaproveitamento de materiais sempre que possível.
+            </p>
+          </div>
+
+          <!-- Reciclagem -->
+          <div class="bg-[#111723] p-6 sm:p-8 rounded-3xl border border-slate-700/60 shadow-lg space-y-4 text-white flex flex-col items-center text-center sm:items-start sm:text-left">
+            <div class="w-12 h-12 rounded-2xl bg-eco-600 text-white flex items-center justify-center font-bold shadow-md mx-auto sm:mx-0">
+              <i data-lucide="flame" class="w-6 h-6"></i>
+            </div>
+            <h3 data-cms="pilar_reciclagem_title" class="font-heading font-bold text-xl text-white text-center sm:text-left text-balance">
+              Reciclagem
+            </h3>
+            <p data-cms="pilar_reciclagem_desc" class="text-slate-200 text-sm leading-relaxed text-pretty">
+              Reciclagem dos resíduos sem condições de reutilização.
+            </p>
+          </div>
+
+          <!-- Destinação Final -->
+          <div class="bg-[#111723] p-6 sm:p-8 rounded-3xl border border-slate-700/60 shadow-lg space-y-4 text-white flex flex-col items-center text-center sm:items-start sm:text-left">
+            <div class="w-12 h-12 rounded-2xl bg-eco-600 text-white flex items-center justify-center font-bold shadow-md mx-auto sm:mx-0">
+              <i data-lucide="check-check" class="w-6 h-6"></i>
+            </div>
+            <h3 data-cms="pilar_destinacao_title" class="font-heading font-bold text-xl text-white text-center sm:text-left text-balance">
+              Destinação Final
+            </h3>
+            <p data-cms="pilar_destinacao_desc" class="text-slate-200 text-sm leading-relaxed text-pretty">
+              Destinação final ambientalmente adequada para os materiais não aproveitáveis.
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= POR QUE A GESTÃO ADEQUADA DE PALETES É IMPORTANTE? ================= -->
+  <section class="pt-14 pb-20 sm:pt-20 sm:pb-28 lg:pt-28 lg:pb-36 bg-[#F8FAF7]">
+    <div class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 space-y-12 sm:space-y-16">
+      
+      <!-- Cabeçalho da Seção -->
+      <div class="text-center max-w-4xl mx-auto space-y-3 sm:space-y-4 pb-2 sm:pb-6">
+        <h2 data-cms="porque_title" class="font-heading font-extrabold text-2xl sm:text-4xl text-eco-900 tracking-tight leading-tight text-balance">
+          Por que a gestão adequada de paletes é importante?
+        </h2>
+        <p data-cms="porque_p1" class="text-slate-600 text-sm sm:text-base lg:text-lg leading-relaxed text-pretty">
+          Muitas empresas não percebem o impacto que o acúmulo de paletes pode gerar ao longo do tempo.
+        </p>
+        <p data-cms="porque_p2" class="text-slate-600 text-sm sm:text-base lg:text-lg leading-relaxed text-pretty">
+          Quando armazenados de forma inadequada, os paletes e resíduos de madeira podem se transformar em um passivo operacional, sanitário e ambiental.
+        </p>
+      </div>
+
+      <!-- 3 Blocos -> lado a lado -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+        
+        <!-- Bloco 1: Riscos Sanitários -->
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-eco-200/80 shadow-sm space-y-4 flex flex-col">
+          <h3 class="font-heading font-bold text-lg sm:text-xl text-slate-900 flex items-center justify-center sm:justify-start gap-2.5 text-balance">
+            <span class="w-2.5 h-6 bg-red-500 rounded-full shrink-0"></span>
+            <span>Riscos Sanitários</span>
+          </h3>
+          <p class="text-xs sm:text-sm text-slate-600 text-center sm:text-left">
+            O acúmulo de madeira cria ambientes favoráveis para:
+          </p>
+          <ul class="space-y-1.5 text-xs sm:text-sm text-slate-700 pl-2">
+            <li class="flex items-center gap-2">• Ratos</li>
+            <li class="flex items-center gap-2">• Baratas</li>
+            <li class="flex items-center gap-2">• Aranhas</li>
+            <li class="flex items-center gap-2">• Insetos diversos</li>
+            <li class="flex items-center gap-2">• Outras pragas urbanas</li>
+          </ul>
+          <p class="text-xs text-slate-500 leading-relaxed pt-2 text-pretty text-center sm:text-left">
+            Além disso, dificulta a limpeza das áreas externas, favorece o acúmulo de sujeira e compromete as condições gerais de higiene do ambiente.
+          </p>
+        </div>
+
+        <!-- Bloco 2: Riscos Operacionais -->
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-eco-200/80 shadow-sm space-y-4 flex flex-col">
+          <h3 class="font-heading font-bold text-lg sm:text-xl text-slate-900 flex items-center justify-center sm:justify-start gap-2.5 text-balance">
+            <span class="w-2.5 h-6 bg-amber-500 rounded-full shrink-0"></span>
+            <span>Riscos Operacionais</span>
+          </h3>
+          <p class="text-xs sm:text-sm text-slate-600 text-center sm:text-left">
+            A ocupação excessiva de espaços por materiais sem utilização pode causar:
+          </p>
+          <ul class="space-y-2 text-xs sm:text-sm text-slate-700 pl-2">
+            <li>• Redução da área útil do pátio;</li>
+            <li>• Dificuldade de movimentação de veículos e equipamentos;</li>
+            <li>• Obstáculos à circulação de pessoas;</li>
+            <li>• Aumento do risco de acidentes;</li>
+            <li>• Prejuízos à organização da empresa.</li>
+          </ul>
+        </div>
+
+        <!-- Bloco 3: Responsabilidade Ambiental -->
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-eco-200/80 shadow-sm space-y-4 flex flex-col">
+          <h3 class="font-heading font-bold text-lg sm:text-xl text-slate-900 flex items-center justify-center sm:justify-start gap-2.5 text-balance">
+            <span class="w-2.5 h-6 bg-eco-600 rounded-full shrink-0"></span>
+            <span>Responsabilidade Ambiental</span>
+          </h3>
+          <p class="text-xs sm:text-sm text-slate-600 leading-relaxed text-pretty text-center sm:text-left">
+            A gestão adequada dos resíduos demonstra comprometimento com a sustentabilidade e com as boas práticas ambientais.
+          </p>
+          <p class="text-xs sm:text-sm text-slate-600 leading-relaxed text-pretty text-center sm:text-left">
+            Empresas que mantêm seus resíduos organizados e corretamente destinados fortalecem sua imagem institucional perante clientes, fornecedores, colaboradores e, principalmente, órgãos fiscalizadores.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= COMO FUNCIONA NOSSO TRABALHO ================= -->
+  <section id="como-funciona" class="pt-14 pb-20 sm:pt-20 sm:pb-28 lg:pt-28 lg:pb-36 bg-white border-t border-eco-100">
+    <div class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 space-y-12 sm:space-y-16">
+      
+      <div class="text-center max-w-4xl mx-auto space-y-3 sm:space-y-4 pb-2 sm:pb-6">
+        <h2 data-cms="comofunciona_title" class="font-heading font-extrabold text-2xl sm:text-4xl lg:text-5xl text-eco-900 tracking-tight leading-tight text-balance">
+          Como Funciona Nosso Trabalho
+        </h2>
+        <p data-cms="comofunciona_p1" class="text-slate-600 text-sm sm:text-base lg:text-lg leading-relaxed text-pretty">
+          Realizamos a coleta dos paletes e resíduos de madeira diretamente nas instalações da empresa.
+        </p>
+        <p data-cms="comofunciona_p2" class="text-slate-600 text-sm sm:text-base lg:text-lg leading-relaxed text-pretty">
+          Após a retirada, todo o material passa por uma avaliação<br class="hidden sm:inline" /> técnica para definição da destinação mais adequada.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+        
+        <!-- 1. Reaproveitamento -->
+        <div class="bg-[#111723] rounded-3xl p-6 sm:p-8 border border-slate-700/60 shadow-lg space-y-6 text-white flex flex-col justify-between">
+          <div class="space-y-5">
+            <div class="w-12 h-12 rounded-2xl bg-eco-600 text-white font-heading font-extrabold text-xl flex items-center justify-center shadow-md mx-auto sm:mx-0">
+              1
+            </div>
+            <h3 data-cms="cf_p1_title" class="font-heading font-bold text-xl sm:text-2xl text-white text-center sm:text-left text-balance">
+              Reaproveitamento
+            </h3>
+            
+            <div class="space-y-3 text-xs sm:text-sm text-slate-200 leading-relaxed text-pretty">
+              <div>
+                <h4 data-cms="cf_p1_subtitle" class="font-bold text-white mb-2 text-sm sm:text-base text-center sm:text-left text-balance">Recuperação de Paletes</h4>
+                <p data-cms="cf_p1_text1" class="mb-3 text-center sm:text-left">Nossa primeira prioridade é prolongar a vida útil dos materiais. Os paletes que apresentam condições de uso são reformados por nossa equipe especializada.</p>
+                <p data-cms="cf_p1_text2" class="text-center sm:text-left">Substituímos peças danificadas e realizamos os reparos necessários para que o palete possa retornar às operações com segurança.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Reciclagem Energética -->
+        <div class="bg-[#111723] rounded-3xl p-6 sm:p-8 border border-slate-700/60 shadow-lg space-y-6 text-white flex flex-col justify-between">
+          <div class="space-y-5">
+            <div class="w-12 h-12 rounded-2xl bg-eco-600 text-white font-heading font-extrabold text-xl flex items-center justify-center shadow-md mx-auto sm:mx-0">
+              2
+            </div>
+            <h3 data-cms="cf_p2_title" class="font-heading font-bold text-xl sm:text-2xl text-white text-center sm:text-left text-balance">
+              Reciclagem Energética
+            </h3>
+            
+            <div class="space-y-3 text-xs sm:text-sm text-slate-200 leading-relaxed text-pretty text-center sm:text-left">
+              <p data-cms="cf_p2_text1">
+                Os resíduos de madeira que não possuem condições de reaproveitamento são transformados em cavaco de madeira.
+              </p>
+              <p data-cms="cf_p2_text2">
+                Esse material é utilizado como combustível para alimentação e partida de caldeiras industriais, contribuindo para o aproveitamento energético da biomassa e reduzindo a necessidade de descarte e desmatamento.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Destinação Final Adequada -->
+        <div class="bg-[#111723] rounded-3xl p-6 sm:p-8 border border-slate-700/60 shadow-lg space-y-6 text-white flex flex-col justify-between">
+          <div class="space-y-5">
+            <div class="w-12 h-12 rounded-2xl bg-eco-600 text-white font-heading font-extrabold text-xl flex items-center justify-center shadow-md mx-auto sm:mx-0">
+              3
+            </div>
+            <h3 data-cms="cf_p3_title" class="font-heading font-bold text-xl sm:text-2xl text-white text-center sm:text-left text-balance">
+              Destinação Final Adequada
+            </h3>
+            
+            <div class="text-xs sm:text-sm text-slate-200 leading-relaxed text-pretty text-center sm:text-left">
+              <p data-cms="cf_p3_text1">
+                Os materiais que não podem ser reaproveitados ou reciclados recebem destinação ambientalmente adequada, seguindo as normas e boas práticas aplicáveis ao gerenciamento de resíduos.
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= BENEFÍCIOS PARA SUA EMPRESA ================= -->
+  <section id="beneficios" class="pt-14 pb-20 sm:pt-20 sm:pb-28 lg:pt-28 lg:pb-36 bg-[#F8FAF7] border-t border-eco-100">
+    <div class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 space-y-12 sm:space-y-16">
+      
+      <div class="text-center max-w-4xl mx-auto space-y-3 sm:space-y-4 pb-2 sm:pb-6">
+        <h2 data-cms="beneficios_title" class="font-heading font-extrabold text-2xl sm:text-4xl lg:text-5xl text-eco-900 tracking-tight leading-tight text-balance">
+          Benefícios para Sua Empresa
+        </h2>
+        <p data-cms="beneficios_subtitle" class="text-slate-600 text-sm sm:text-base lg:text-lg leading-relaxed text-pretty">
+          Ao contratar nossos serviços, sua empresa obtém benefícios<br class="hidden sm:inline" /> que vão muito além da simples retirada de paletes.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
+        
+        <!-- Mais Segurança Sanitária -->
+        <div class="p-6 rounded-3xl bg-white border border-eco-200/80 shadow-sm space-y-3 flex flex-col items-center sm:items-start text-center sm:text-left">
+          <div class="w-11 h-11 rounded-2xl bg-eco-100 text-eco-700 flex items-center justify-center font-bold mx-auto sm:mx-0">
+            <i data-lucide="shield" class="w-5 h-5"></i>
+          </div>
+          <h3 class="font-heading font-bold text-base sm:text-lg text-eco-900 text-balance">
+            Mais Segurança Sanitária
+          </h3>
+          <ul class="text-xs sm:text-sm text-slate-600 space-y-2 text-left w-full pl-2">
+            <li>• Redução dos locais propícios para abrigo de pragas;</li>
+            <li>• Melhoria das condições de limpeza e higiene;</li>
+            <li>• Ambientes mais organizados e seguros.</li>
+          </ul>
+        </div>
+
+        <!-- Mais Espaço e Organização -->
+        <div class="p-6 rounded-3xl bg-white border border-eco-200/80 shadow-sm space-y-3 flex flex-col items-center sm:items-start text-center sm:text-left">
+          <div class="w-11 h-11 rounded-2xl bg-eco-100 text-eco-700 flex items-center justify-center font-bold mx-auto sm:mx-0">
+            <i data-lucide="layout-grid" class="w-5 h-5"></i>
+          </div>
+          <h3 class="font-heading font-bold text-base sm:text-lg text-eco-900 text-balance">
+            Mais Espaço e Organização
+          </h3>
+          <ul class="text-xs sm:text-sm text-slate-600 space-y-2 text-left w-full pl-2">
+            <li>• Liberação de áreas ocupadas por materiais sem utilização;</li>
+            <li>• Melhor aproveitamento dos espaços operacionais;</li>
+            <li>• Maior eficiência na gestão do pátio.</li>
+          </ul>
+        </div>
+
+        <!-- Mais Sustentabilidade -->
+        <div class="p-6 rounded-3xl bg-white border border-eco-200/80 shadow-sm space-y-3 flex flex-col items-center sm:items-start text-center sm:text-left">
+          <div class="w-11 h-11 rounded-2xl bg-eco-100 text-eco-700 flex items-center justify-center font-bold mx-auto sm:mx-0">
+            <i data-lucide="leaf" class="w-5 h-5"></i>
+          </div>
+          <h3 class="font-heading font-bold text-base sm:text-lg text-eco-900 text-balance">
+            Mais Sustentabilidade
+          </h3>
+          <ul class="text-xs sm:text-sm text-slate-600 space-y-2 text-left w-full pl-2">
+            <li>• Incentivo ao reaproveitamento de materiais;</li>
+            <li>• Redução da geração de resíduos;</li>
+            <li>• Valorização das práticas ambientais da empresa.</li>
+          </ul>
+        </div>
+
+        <!-- Mais Tranquilidade Operacional -->
+        <div class="p-6 rounded-3xl bg-white border border-eco-200/80 shadow-sm space-y-3 flex flex-col items-center sm:items-start text-center sm:text-left">
+          <div class="w-11 h-11 rounded-2xl bg-eco-100 text-eco-700 flex items-center justify-center font-bold mx-auto sm:mx-0">
+            <i data-lucide="heart-handshake" class="w-5 h-5"></i>
+          </div>
+          <h3 class="font-heading font-bold text-base sm:text-lg text-eco-900 text-balance">
+            Mais Tranquilidade Operacional
+          </h3>
+          <ul class="text-xs sm:text-sm text-slate-600 space-y-2 text-left w-full pl-2">
+            <li>• Gestão responsável dos resíduos de madeira;</li>
+            <li>• Redução de passivos ambientais;</li>
+            <li>• Apoio às boas práticas corporativas.</li>
+          </ul>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="bg-eco-deep text-slate-400 pt-12 pb-8 border-t border-eco-900 text-xs">
+    <div class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 pb-10 border-b border-white/10 text-center sm:text-left">
+        
+        <!-- Coluna 1: Logo & Slogan -->
+        <div class="space-y-3 flex flex-col items-center sm:items-start">
+          <img src="assets/logo-white.png" alt="Melvale" class="h-9 sm:h-10 w-auto object-contain" />
+          <p data-cms="footer_slogan" class="leading-relaxed text-slate-300 text-pretty">
+            Gestão Sustentável de<br />Paletes e Resíduos de Madeira.
+          </p>
+        </div>
+
+        <!-- Coluna 2: Menu -->
+        <div>
+          <h4 class="font-heading font-bold text-white uppercase text-xs tracking-wider mb-3">Menu</h4>
+          <ul class="space-y-2 sm:space-y-1.5">
+            <li><a href="index.html" class="hover:text-white transition-colors py-1 block sm:inline">Início</a></li>
+            <li><a href="#como-funciona" class="hover:text-white transition-colors py-1 block sm:inline">Como Funciona</a></li>
+            <li><a href="#beneficios" class="hover:text-white transition-colors py-1 block sm:inline">Benefícios</a></li>
+            <li><a href="filiais.html" class="hover:text-white transition-colors py-1 block sm:inline">Nossas Filiais</a></li>
+            <li><a href="produtos.html" class="hover:text-white transition-colors py-1 block sm:inline">Nossos Produtos</a></li>
+            <li><a href="contato.html" class="hover:text-white transition-colors py-1 block sm:inline">Contato</a></li>
+            <li><a href="admin.html" class="hover:text-white transition-colors py-1 block sm:inline">Login</a></li>
+          </ul>
+        </div>
+
+        <!-- Coluna 3: Nossas Unidades -->
+        <div>
+          <h4 class="font-heading font-bold text-white uppercase text-xs tracking-wider mb-3">Nossas Unidades</h4>
+          <ul class="space-y-2 sm:space-y-1.5 text-slate-300">
+            <li>Luzerna/SC</li>
+            <li>Maravilha/SC</li>
+            <li>Uberlândia/MG</li>
+            <li>Bom Princípio/RS</li>
+            <li>Aparecida de Goiânia/GO</li>
+          </ul>
+        </div>
+
+        <!-- Coluna 4: Contato -->
+        <div>
+          <h4 class="font-heading font-bold text-white uppercase text-xs tracking-wider mb-3">Contato</h4>
+          <ul class="space-y-3 sm:space-y-2.5 text-slate-300 flex flex-col items-center sm:items-start">
+            <li class="flex items-center gap-2.5">
+              <i data-lucide="phone" class="w-4 h-4 text-eco-400 shrink-0"></i>
+              <a href="tel:0030000000" data-cms="footer_phone" class="hover:text-white transition-colors py-0.5">(00) 3000-0000</a>
+            </li>
+            <li class="flex items-center gap-2.5">
+              <i data-lucide="message-circle" class="w-4 h-4 text-eco-400 shrink-0"></i>
+              <a href="https://wa.me/5500930000000" data-cms="footer_whatsapp" target="_blank" class="hover:text-white transition-colors py-0.5">(00) 93000-0000</a>
+            </li>
+            <li class="flex items-center gap-2.5 pt-1">
+              <i data-lucide="mail" class="w-4 h-4 text-eco-400 shrink-0"></i>
+              <a href="mailto:contato@melvale.com.br" data-cms="footer_email" class="hover:text-white transition-colors break-all py-0.5">contato@melvale.com.br</a>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="pt-6 text-center text-slate-500 text-pretty">
+        <p>© 2026 Melvale - Gestão Sustentável de Paletes e Resíduos de Madeira. Todos os direitos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/content.js"></script>
+  <script>
+    lucide.createIcons();
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    function toggleMobileMenu() {
+      mobileMenu.classList.toggle('hidden');
+    }
+    mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+  </script>
+
+</body>
+</html>
